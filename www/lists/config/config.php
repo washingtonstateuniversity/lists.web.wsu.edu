@@ -1,5 +1,5 @@
 <?php
-
+// Testing.
 // Keep config-custom.php out of version control as it contains secrets.
 if ( file_exists( 'config-custom.php' ) ) {
 	include_once( 'config-custom.php' );
