@@ -1,8 +1,8 @@
 <?php
-// Testing.
+
 // Keep config-custom.php out of version control as it contains secrets.
-if ( file_exists( 'config-custom.php' ) ) {
-	include_once( 'config-custom.php' );
+if ( file_exists( __DIR__ . '/config-custom.php' ) ) {
+	include_once( __DIR__ . '/config-custom.php' );
 }
 
 define( 'EMAILTEXTCREDITS', true );
