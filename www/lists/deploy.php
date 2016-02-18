@@ -16,7 +16,7 @@ if ( 'create' === $_SERVER['HTTP_X_GITHUB_EVENT'] && 'tag' === $payload->ref_typ
                 die( 'Invalid tag format' );
         }
 
-        shell_exec( 'sh /home/www-data/deploy-lists.sh' . $tag . ' > /var/www/lists/deploy-results.txt' );
+        shell_exec( 'sh /home/www-data/deploy-lists.sh ' . $tag . ' > /var/www/lists/deploy-results.txt' );
         die( 'Deploy ' . $tag );
 } else {
         die();
