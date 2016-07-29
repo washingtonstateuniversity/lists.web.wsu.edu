@@ -257,6 +257,9 @@ function sendEmail($messageid, $email, $hash, $htmlpref = 0, $rssitems = array()
     } else {
         $html['signature'] = $PoweredByText;
     }
+
+    $html['signature'] = ''; /* UCOMM EDIT: We can add credit elsewhere if it make sense. */
+
 #  $content = $cached[$messageid]["htmlcontent"];
 
     if (VERBOSE && $getspeedstats) {
