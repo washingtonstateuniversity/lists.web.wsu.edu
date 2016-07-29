@@ -655,6 +655,7 @@ $lan = array(
 
 function getTranslationUpdates()
 {
+    return ''; // UCOMM Edit - avoid checking phplist.org constantly.
     ## @@@TODO add some more error handling
     $LU = false;
     $lan_update = fetchUrl(TRANSLATIONS_XML);
