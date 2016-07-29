@@ -9,6 +9,7 @@ if (true || !isset($_GET['page']) || (isset($_GET['page']) && in_array($_GET['pa
     } elseif (isset($_GET['page']) && !in_array($_GET['page'], array('home', 'about', 'dashboard', 'community','login'))) {
       $max = 3; // only 3 on most pages
     }
+    /* UCOMM Edit
     include dirname(__FILE__).'/onyx-rss.php';
     $rss = new ONYX_RSS();
     $rss->setDebugMode(false);
@@ -39,7 +40,7 @@ if (true || !isset($_GET['page']) || (isset($_GET['page']) && in_array($_GET['pa
       </li>';
         }
     }
-
+    */
     if (!empty($news)) {
         print '<div id="newsfeed" class="menutableright block">';
         print '
