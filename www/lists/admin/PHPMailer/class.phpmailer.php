@@ -323,7 +323,7 @@ class PHPMailer
      * @var integer
      * @see SMTP::$do_debug
      */
-    public $SMTPDebug = 4;
+    public $SMTPDebug = 0;
 
     /**
      * How to handle debug output.
@@ -339,7 +339,7 @@ class PHPMailer
      * @var string|callable
      * @see SMTP::$Debugoutput
      */
-    public $Debugoutput = 'error_log';
+    public $Debugoutput = 'echo';
 
     /**
      * Whether to keep SMTP connection open after each message.

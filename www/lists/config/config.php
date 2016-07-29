@@ -38,7 +38,7 @@ $bounce_protocol = 'pop';
 # commandline option. If this is 0, users cannot run the page from the web
 # frontend. Read README.commandline to find out how to set it up on the
 # commandline
-define ("MANUALLY_PROCESS_BOUNCES",1);
+define('MANUALLY_PROCESS_BOUNCES', 1);
 
 # when the protocol is pop, specify these three
 $bounce_mailbox_host = 'localhost';
@@ -49,7 +49,7 @@ $bounce_mailbox_password = 'password';
 # the default should be fine but if it doesn't work, you can try the second
 # one. To do that, add a # before the first line and take off the one before the
 # second line
-$bounce_mailbox_port = "110/pop3/notls";
+$bounce_mailbox_port = '110/pop3/notls';
 #$bounce_mailbox_port = "110/pop3";
 
 # it's getting more common to have secure connections, in which case you probably want to use
@@ -72,3 +72,8 @@ $bounce_mailbox_purge_unprocessed = 1;
 
 # how many bounces in a row need to have occurred for a user to be marked unconfirmed
 $bounce_unsubscribe_threshold = 5;
+
+# choose the encryption method for password
+# check the extended config for more info
+# in most cases, it is fine to leave this as it is
+define('ENCRYPTION_ALGO', 'sha256');

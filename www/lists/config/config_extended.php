@@ -221,9 +221,9 @@ define('WARN_ABOUT_PHP_SETTINGS', 1);
 # variables of PHP. check http://www.php.net/manual/en/language.variables.predefined.php
 # the values are different per system, but these ones are quite common.
 $userhistory_systeminfo = array(
-  'HTTP_USER_AGENT',
-  'HTTP_REFERER',
-  'REMOTE_ADDR',
+    'HTTP_USER_AGENT',
+    'HTTP_REFERER',
+    'REMOTE_ADDR',
 );
 
 # add spamblock
@@ -542,6 +542,8 @@ Message sending options
 ## when you do this, you may need to run some tests, to see if the phpMailer version
 ## you have works ok
 #define ('PHPMAILER_PATH','/usr/share/php/libphp-phpmailer/class.phpmailer.php');
+# or a more recent version of phpMailer will be like this
+#define ('PHPMAILER_PATH','/usr/share/php/libphp-phpmailer/PHPMailerAutoload.php');
 
 # To use a SMTP server please give your server hostname here, leave it blank to use the standard
 # PHP mail() command.

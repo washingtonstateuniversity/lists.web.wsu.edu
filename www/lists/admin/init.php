@@ -8,13 +8,13 @@
 define('PHPLISTINIT', true);
 error_reporting(0);
 
-define("VERSION", "3.2.4");
+define("VERSION", "3.2.5");
 if (!defined('DEVVERSION')) {
     define('DEVVERSION', false);
 }
 
 # record the start time(usec) of script
-$now =  gettimeofday();
+$now = gettimeofday();
 $GLOBALS['pagestats'] = array();
 $GLOBALS['pagestats']['time_start'] = $now['sec'] * 1000000 + $now['usec'];
 $GLOBALS['pagestats']['number_of_queries'] = 0;
@@ -77,25 +77,25 @@ if (isset($GLOBALS['design'])) {
 #  $GLOBALS['design'] = basename($GLOBALS['design']);
 }
 
-if (!isset($GLOBALS['ui']) || !is_dir(dirname(__FILE__).'/ui/'.$GLOBALS['ui'])) {
+if (!isset($GLOBALS['ui']) || !is_dir(dirname(__FILE__) . '/ui/' . $GLOBALS['ui'])) {
     ## prefer dressprow over orange
-  if (is_dir(dirname(__FILE__).'/ui/dressprow')) {
-      $GLOBALS['ui'] = 'dressprow';
-  } else {
-      $GLOBALS['ui'] = 'default';
-  }
+    if (is_dir(dirname(__FILE__) . '/ui/dressprow')) {
+        $GLOBALS['ui'] = 'dressprow';
+    } else {
+        $GLOBALS['ui'] = 'default';
+    }
 }
 
-include_once dirname(__FILE__).'/structure.php';
+include_once dirname(__FILE__) . '/structure.php';
 
 if (!isset($tables)) {
     $tables = array();
 }
 foreach ($GLOBALS['DBstructuser'] as $tablename => $tablecolumns) {
-    $tables[$tablename] =  $usertable_prefix.$tablename;
+    $tables[$tablename] = $usertable_prefix . $tablename;
 };
 foreach ($GLOBALS['DBstructphplist'] as $tablename => $tablecolumns) {
-    $tables[$tablename] =  $table_prefix.$tablename;
+    $tables[$tablename] = $table_prefix . $tablename;
 };
 # unset the struct arrays, DBStruct and tables globals remain for the rest of the program
 unset($GLOBALS['DBstructuser']);
@@ -112,7 +112,7 @@ if ($magic_quotes == 'off' || empty($magic_quotes)) {
 if (empty($GLOBALS['language_module'])) {
     $GLOBALS['language_module'] = 'english.inc';
 }
-if (empty($GLOBALS['database_module']) || !is_file(dirname(__FILE__).'/'.$GLOBALS['database_module'])) {
+if (empty($GLOBALS['database_module']) || !is_file(dirname(__FILE__) . '/' . $GLOBALS['database_module'])) {
     $GLOBALS['database_module'] = 'mysqli.inc';
 }
 if (!isset($database_connection_compression)) {
@@ -221,26 +221,29 @@ if (!defined('UNSUBSCRIBE_JUMPOFF')) {
 if (!defined('SHOW_UNSUBSCRIBELINK')) {
     define('SHOW_UNSUBSCRIBELINK', true);
 }
+if (!defined('SHOW_SUBSCRIBELINK')) {
+    define('SHOW_SUBSCRIBELINK', true);
+}
 
 if (ASKFORPASSWORD && defined('ENCRYPTPASSWORD') && ENCRYPTPASSWORD) {
     ##https://mantis.phplist.com/view.php?id=16787
-  # passwords are encrypted, so we need to stick to md5 to keep working
+    # passwords are encrypted, so we need to stick to md5 to keep working
 
-  ## we also need some "update" mechanism to handle an algo change
-  if (!defined('ENCRYPTION_ALGO')) {
-      define('ENCRYPTION_ALGO', 'md5');
-  }
+    ## we also need some "update" mechanism to handle an algo change
+    if (!defined('ENCRYPTION_ALGO')) {
+        define('ENCRYPTION_ALGO', 'md5');
+    }
 }
 
 if (ASKFORPASSWORD && !defined('ENCRYPTPASSWORD')) {
     ## we now always encrypt
-  define('ENCRYPTPASSWORD', 1);
+    define('ENCRYPTPASSWORD', 1);
 }
 if (!defined('ENCRYPTPASSWORD')) {
     ## old method to encrypt, used to be with md5, keep like this for backward compat.
-  if (!defined('ENCRYPTION_ALGO')) {
-      define('ENCRYPTION_ALGO', 'md5');
-  }
+    if (!defined('ENCRYPTION_ALGO')) {
+        define('ENCRYPTION_ALGO', 'md5');
+    }
 #  define("ENCRYPTPASSWORD",0);
 }
 
@@ -541,7 +544,7 @@ if (!isset($GLOBALS['installation_name'])) {
     $GLOBALS['installation_name'] = 'phpList';
 }
 if (!defined('SESSIONNAME')) {
-    define('SESSIONNAME', 'phpList'.$GLOBALS['installation_name'].'session');
+    define('SESSIONNAME', 'phpList' . $GLOBALS['installation_name'] . 'session');
 }
 ## this doesn't yet work with the FCKEditor
 #ini_set('session.name',str_replace(' ','',SESSIONNAME));
@@ -560,7 +563,7 @@ if (!isset($allowed_referrers) || !is_array($allowed_referrers)) {
     $allowed_referrers = array();
 }
 if (!defined('ACCESS_CONTROL_ALLOW_ORIGIN')) {
-    define('ACCESS_CONTROL_ALLOW_ORIGIN', $GLOBALS['scheme'].'://'.$_SERVER['HTTP_HOST']);
+    define('ACCESS_CONTROL_ALLOW_ORIGIN', $GLOBALS['scheme'] . '://' . $_SERVER['HTTP_HOST']);
 }
 
 if (!defined('PREFERENCEPAGE_SHOW_PRIVATE_LISTS')) {
@@ -618,7 +621,7 @@ if (!isset($pageroot)) {
     $GLOBALS['pageroot'] = '/lists';
 }
 ## as the "admin" in adminpages is hardcoded, don't put it in the config file
-$adminpages = $GLOBALS['pageroot'].'/admin';
+$adminpages = $GLOBALS['pageroot'] . '/admin';
 ## remove possibly duplicated // at the beginning
 $adminpages = preg_replace('~^//~', '/', $adminpages);
 
@@ -665,6 +668,9 @@ if (!defined('FORWARD_PERSONAL_NOTE_SIZE')) {
 if (!defined('EMBEDUPLOADIMAGES')) {
     define('EMBEDUPLOADIMAGES', 0);
 }
+if (!defined('EMBEDEXTERNALIMAGES')) {
+    define('EMBEDEXTERNALIMAGES', false);
+}
 if (!defined('IMPORT_FILESIZE')) {
     define('IMPORT_FILESIZE', 5);
 }
@@ -674,17 +680,21 @@ if (!defined('SMTP_TIMEOUT')) {
 ## experimental, mark mails "todo" in the DB and process the "todo" list, to avoid the user query being run every queue run
 if (!defined('MESSAGEQUEUE_PREPARE')) {
     ## with a multi-process config, we need the queue prepare mechanism and memcache
-  if (MAX_SENDPROCESSES > 1) {
-      define('MESSAGEQUEUE_PREPARE', true);
-  } else {
-      define('MESSAGEQUEUE_PREPARE', false);
-  }
+    if (MAX_SENDPROCESSES > 1) {
+        define('MESSAGEQUEUE_PREPARE', true);
+    } else {
+        define('MESSAGEQUEUE_PREPARE', false);
+    }
 }
 if (!isset($GLOBALS['export_mimetype'])) {
     $GLOBALS['export_mimetype'] = 'application/csv';
 }
 if (!isset($GLOBALS['admin_auth_module'])) {
     $GLOBALS['admin_auth_module'] = 'phplist_auth.inc';
+}
+// unset the default admin_auth_module, to use the plugin version
+if ($GLOBALS['admin_auth_module'] == 'phplist_auth.inc') {
+    $GLOBALS['admin_auth_module'] = '';
 }
 if (!isset($GLOBALS['require_login'])) {
     $GLOBALS['require_login'] = 1;
@@ -722,42 +732,42 @@ $firstInstallButton = '';
 $GLOBALS['MC'] = null;
 
 if (defined('MEMCACHED')) {
-    include_once dirname(__FILE__).'/class.memcached.php';
+    include_once dirname(__FILE__) . '/class.memcached.php';
     if (class_exists('phpListMC')) {
         $GLOBALS['MC'] = new phpListMC();
         list($mc_server, $mc_port) = explode(':', MEMCACHED);
         $MC->addServer($mc_server, $mc_port);
 
-    /* check that the MC connection is ok
-    $MC->add('Hello','World');
-    $test = $MC->get('Hello');
-    if ($test != 'World') {
-      unset($MC);
-    }
-    */
+        /* check that the MC connection is ok
+        $MC->add('Hello','World');
+        $test = $MC->get('Hello');
+        if ($test != 'World') {
+          unset($MC);
+        }
+        */
     }
 }
 
 ## global counters array to keep track of things
 $counters = array(
-  'campaign'                        => 0,
-  'num_users_for_message'           => 0,
-  'batch_count'                     => 0,
-  'batch_total'                     => 0,
-  'sendemail returned false total'  => 0,
-  'send blocked by domain throttle' => 0,
-  'add attachment error'            => 0,
-  'sendemail returned false'        => 0,
-  'sentastest'                      => 0,
-  'invalid'                         => 0,
-  'failed_sent'                     => 0,
-  'sent'                            => 0,
-  'num_per_batch'                   => 0,
+    'campaign' => 0,
+    'num_users_for_message' => 0,
+    'batch_count' => 0,
+    'batch_total' => 0,
+    'sendemail returned false total' => 0,
+    'send blocked by domain throttle' => 0,
+    'add attachment error' => 0,
+    'sendemail returned false' => 0,
+    'sentastest' => 0,
+    'invalid' => 0,
+    'failed_sent' => 0,
+    'sent' => 0,
+    'num_per_batch' => 0,
 );
 
 $repetitionLabels = array(
-    60    => 'hour',  // can't use s() here yet
-    1440  => 'day',
+    60 => 'hour',  // can't use s() here yet
+    1440 => 'day',
     10080 => 'week',
     20160 => 'fortnight',
     40320 => 'four weeks',
@@ -769,67 +779,67 @@ $GLOBALS['disallowpages'] = array();
 $system_pages = array(
     'system' => array(
         'adminattributes' => 'none',
-        'attributes'      => 'none',
-        'upgrade'         => 'none',
-        'configure'       => 'none',
-        'spage'           => 'owner',
-        'spageedit'       => 'owner',
-        'defaultconfig'   => 'none',
-        'defaults'        => 'none',
-        'initialise'      => 'none',
-        'bounces'         => 'none',
-        'bounce'          => 'none',
-        'processbounces'  => 'none',
-        'eventlog'        => 'none',
-        'reconcileusers'  => 'none',
-        'getrss'          => 'owner',
-        'viewrss'         => 'owner',
-        'purgerss'        => 'none',
-        'setup'           => 'none',
-        'dbcheck'         => 'none',
+        'attributes' => 'none',
+        'upgrade' => 'none',
+        'configure' => 'none',
+        'spage' => 'owner',
+        'spageedit' => 'owner',
+        'defaultconfig' => 'none',
+        'defaults' => 'none',
+        'initialise' => 'none',
+        'bounces' => 'none',
+        'bounce' => 'none',
+        'processbounces' => 'none',
+        'eventlog' => 'none',
+        'reconcileusers' => 'none',
+        'getrss' => 'owner',
+        'viewrss' => 'owner',
+        'purgerss' => 'none',
+        'setup' => 'none',
+        'dbcheck' => 'none',
 
     ),
     'list' => array(
-        'list'     => 'owner',
+        'list' => 'owner',
         'editlist' => 'owner',
-        'members'  => 'owner',
+        'members' => 'owner',
     ),
     'user' => array(
-        'user'           => 'none',
-        'users'          => 'none',
-        'dlusers'        => 'none',
+        'user' => 'none',
+        'users' => 'none',
+        'dlusers' => 'none',
         'editattributes' => 'none',
-        'usercheck'      => 'none',
-        'import1'        => 'none',
-        'import2'        => 'none',
-        'import3'        => 'none',
-        'import4'        => 'none',
-        'import'         => 'none',
-        'export'         => 'none',
-        'massunconfirm'  => 'none',
+        'usercheck' => 'none',
+        'import1' => 'none',
+        'import2' => 'none',
+        'import3' => 'none',
+        'import4' => 'none',
+        'import' => 'none',
+        'export' => 'none',
+        'massunconfirm' => 'none',
 
     ),
     'message' => array(
-        'message'      => 'owner',
-        'messages'     => 'owner',
+        'message' => 'owner',
+        'messages' => 'owner',
         'processqueue' => 'none',
-        'send'         => 'owner',
-        'preparesend'  => 'none',
+        'send' => 'owner',
+        'preparesend' => 'none',
         'sendprepared' => 'all',
-        'template'     => 'none',
-        'templates'    => 'none',
+        'template' => 'none',
+        'templates' => 'none',
     ),
     'clickstats' => array(
-        'statsmgt'      => 'owner',
-        'mclicks'       => 'owner',
-        'uclicks'       => 'owner',
-        'userclicks'    => 'owner',
-        'mviews'        => 'owner',
+        'statsmgt' => 'owner',
+        'mclicks' => 'owner',
+        'uclicks' => 'owner',
+        'userclicks' => 'owner',
+        'mviews' => 'owner',
         'statsoverview' => 'owner',
 
     ),
     'admin' => array(
         'admins' => 'none',
-        'admin'  => 'owner',
+        'admin' => 'owner',
     ),
 );
