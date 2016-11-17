@@ -421,7 +421,7 @@ if (isset($_POST['subscribe']) && is_email($_POST['email']) && $listsok && $allt
             $GLOBALS['tables']['user'], $_GET['uid']));
         $userid = $req[0];
     } else {
-        $req = Sql_Fetch_Row_query("select id from {$GLOBALS['tables']['user']} where email = \"" . $_GET['email'] . '"');
+        $req = Sql_Fetch_Row_query("select id from {$GLOBALS['tables']['user']} where email = \"" . sql_escape($_GET['email']) . '"');
         $userid = $req[0];
     }
     if (!$userid) {
@@ -506,10 +506,10 @@ if (isset($_POST['subscribe']) && is_email($_POST['email']) && $listsok && $allt
     }
 
     $query = sprintf('update %s set email = "%s", %s htmlemail = %d where id = %d',
-        $GLOBALS['tables']['user'], addslashes($_POST['email']), $storepassword, $_POST['htmlemail'], $userid);
+        $GLOBALS['tables']['user'], sql_escape($_POST['email']), $storepassword, $_POST['htmlemail'], $userid);
     #print $query;
     $result = Sql_query($query);
-    if ($data['email'] != $email) {
+    if (strtolower($data['email']) != strtolower($email)) {
         $emailchanged = 1;
         Sql_Query(sprintf('update %s set confirmed = 0 where id = %d', $GLOBALS['tables']['user'], $userid));
     }
@@ -788,7 +788,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
             $data[$row['attributeid']] = $row['value'];
         }
 
-        $email = $current['email'];
+        $email = obfuscateEmailAddress($current['email']);
         $htmlemail = $current['htmlemail'];
         # override with posted info
         foreach ($current as $key => $val) {
@@ -824,7 +824,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
     $html = '';
     if (!isset($_GET['page']) || (isset($_GET['page']) && $_GET['page'] != 'import1')) {
         $html = sprintf('
-  <tr><td><div class="required">%s</div></td>
+  <tr><td><div class="required">%s *</div></td>
   <td class="attributeinput"><input type=text name=email value="%s" size="%d" />
   <script language="Javascript" type="text/javascript">addFieldToCheck("email","%s");</script></td></tr>',
             $GLOBALS['strEmail'], htmlspecialchars($email), $textlinewidth, $GLOBALS['strEmail']);
@@ -836,7 +836,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
             $_REQUEST['emailconfirm'] = '';
         }
         $html .= sprintf('
-  <tr><td><div class="required">%s</div></td>
+  <tr><td><div class="required">%s *</div></td>
   <td class="attributeinput"><input type=text name=emailconfirm value="%s" size="%d" />
   <script language="Javascript" type="text/javascript">addFieldToCheck("emailconfirm","%s");</script></td></tr>',
             $GLOBALS['strConfirmEmail'], htmlspecialchars(stripslashes($_REQUEST['emailconfirm'])), $textlinewidth,
@@ -968,7 +968,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                     $output[$attr['id']] .= sprintf("\n" . '<input type="checkbox" name="%s" value="on" %s class="attributeinput" />',
                         $fieldname, $checked);
                     $output[$attr['id']] .= sprintf("\n" . '<span class="%s">%s</span>',
-                        $attr['required'] ? 'required' : 'attributename', stripslashes($attr['name']));
+                        $attr['required'] ? 'required' : 'attributename', $attr['required'] ? stripslashes($attr['name']).' *' :  stripslashes($attr['name']));
                     if ($attr['required']) {
                         $output[$attr['id']] .= sprintf('<script language="Javascript" type="text/javascript">addFieldToCheck("%s","%s");</script>',
                             $fieldname, $attr['name']);
@@ -976,7 +976,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                     break;
                 case 'radio':
                     $output[$attr['id']] .= sprintf("\n" . '<tr><td colspan="2"><div class="%s">%s</div>',
-                        $attr['required'] ? 'required' : 'attributename', stripslashes($attr['name']));
+                        $attr['required'] ? 'required' : 'attributename', $attr['required'] ? stripslashes($attr['name']).' *' :  stripslashes($attr['name']));
                     $values_request = Sql_Query("select * from $table_prefix" . 'listattr_' . $attr['tablename'] . ' order by listorder,name');
                     while ($value = Sql_Fetch_array($values_request)) {
                         if (!empty($_POST[$fieldname])) {
@@ -996,7 +996,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                     break;
                 case 'select':
                     $output[$attr['id']] .= sprintf("\n" . '<tr><td><div class="%s">%s</div>',
-                        $attr['required'] ? 'required' : 'attributename', stripslashes($attr['name']));
+                        $attr['required'] ? 'required' : 'attributename', $attr['required'] ? stripslashes($attr['name']).' *' :  stripslashes($attr['name']));
                     $values_request = Sql_Query("select * from $table_prefix" . 'listattr_' . $attr['tablename'] . ' order by listorder,name');
                     $output[$attr['id']] .= sprintf('</td><td class="attributeinput"><!--%d--><select name="%s" class="attributeinput">',
                         $data[$attr['id']], $fieldname);
@@ -1022,7 +1022,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                     break;
                 case 'checkboxgroup':
                     $output[$attr['id']] .= sprintf("\n" . '<tr><td><div class="%s">%s</div>',
-                        $attr['required'] ? 'required' : 'attributename', stripslashes($attr['name']));
+                        $attr['required'] ? 'required' : 'attributename', $attr['required'] ? stripslashes($attr['name']).' *' :  stripslashes($attr['name']));
                     $values_request = Sql_Query("select * from $table_prefix" . 'listattr_' . $attr['tablename'] . ' order by listorder,name');
                     $output[$attr['id']] .= sprintf('</td>');
                     $first_td = 0;
@@ -1048,7 +1048,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                     break;
                 case 'textline':
                     $output[$attr['id']] .= sprintf("\n" . '<tr><td><div class="%s">%s</div>',
-                        $attr['required'] ? 'required' : 'attributename', $attr['name']);
+                        $attr['required'] ? 'required' : 'attributename', $attr['required'] ? $attr['name'].' *' : $attr['name']);
                     $output[$attr['id']] .= sprintf('</td><td class="attributeinput">
             <input type="text" name="%s"  class="attributeinput" size="%d" value="%s" />', $fieldname,
                         $textlinewidth,
@@ -1061,7 +1061,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                 case 'textarea':
                     $output[$attr['id']] .= sprintf("\n" . '<tr><td colspan="2">
             <div class="%s">%s</div></td></tr>', $attr['required'] ? 'required' : 'attributename',
-                        $attr['name']);
+                        $attr['required'] ? $attr['name'].' *' : $attr['name']);
                     $output[$attr['id']] .= sprintf('<tr><td class="attributeinput" colspan="2">
             <textarea name="%s" rows="%d"  class="attributeinput" cols="%d" wrap="virtual">%s</textarea>',
                         $fieldname, $textarearows, $textareacols,
@@ -1086,7 +1086,7 @@ function ListAttributes($attributes, $attributedata, $htmlchoice = 0, $userid = 
                     }
 
                     $output[$attr['id']] = sprintf("\n" . '<tr><td><div class="%s">%s</div>',
-                        $attr['required'] ? 'required' : 'attributename', $attr['name']);
+                        $attr['required'] ? 'required' : 'attributename', $attr['required'] ? $attr['name'].' *' : $attr['name']);
                     $output[$attr['id']] .= sprintf('</td><td class="attributeinput">
             %s</td></tr>', $date->showInput($fieldname, '', $val));
                     break;
@@ -1156,7 +1156,7 @@ function ListAttributes2011($attributes, $attributedata, $htmlchoice = 0, $useri
 
     $html = '';
     $html .= '<fieldset class="subscriberdetails">';
-    $html .= sprintf('<div class="required"><label for="email">%s</label>
+    $html .= sprintf('<div class="required"><label for="email">%s *</label>
     <input type="text" name="email" value="%s" class="input email required" />', $GLOBALS['strEmail'],
         htmlspecialchars($email));
 

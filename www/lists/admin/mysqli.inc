@@ -3,26 +3,28 @@
 # sql functions, currently only set up to work with MySql
 # replace functions in this file to make it work with other Databases
 
-if (!function_exists("mysqli_connect")) {
-    header('Mysqli functionality missing', true, 500);
+if (!function_exists("mysqli_init")) {
+    header('HTTP/1.0 500 Mysqli functionality missing');
     print "Fatal Error: Mysql is not supported in your PHP, recompile and try again.";
     exit;
 }
 
 function Sql_Connect($host, $user, $password, $database)
 {
-    $compress = (empty($GLOBALS['database_connection_compression'])) ? 0 : MYSQLI_CLIENT_COMPRESS;
-    $secure = (empty($GLOBALS['database_connection_ssl'])) ? 0 : MYSQLI_CLIENT_SSL;
+    global $database_port, $database_socket, $database_connection_compression, $database_connection_ssl;
 
-    if ($host && $user) {
-        $db = mysqli_connect($host, $user, $password, false, $compress | $secure);
+    if (!$host || !$user) {
+        header('HTTP/1.0 500 Cannot connect to database');
+        print "Cannot connect to Database, host and user are required. Please check your configuration";
+        exit;
     }
-    $errno = mysqli_connect_errno();
-    if (!$errno) {
-        $res = mysqli_select_db($db, $database);
-        $errno = mysqli_errno($db);
-    }
-    if ($errno) {
+    $db = mysqli_init();
+    $compress = empty($database_connection_compression) ? 0 : MYSQLI_CLIENT_COMPRESS;
+    $secure = empty($database_connection_ssl) ? 0 : MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
+
+    if (!mysqli_real_connect($db, $host, $user, $password, $database, $database_port, $database_socket, $compress | $secure)) {
+        $errno = mysqli_connect_errno();
+
         if (isset($GLOBALS['plugins']) && is_array($GLOBALS['plugins'])) {
             foreach ($GLOBALS['plugins'] as $pluginname => $plugin) {
                 $plugin->processDBerror($errno);
@@ -30,27 +32,30 @@ function Sql_Connect($host, $user, $password, $database)
         }
         switch ($errno) {
             case 1049: # unknown database
-                header('Unknown database', true, 501);
+                header('HTTP/1.0 500 Unknown database');
                 print "Unknown database, cannot continue";
                 exit;
             case 1045: # access denied
-                header('Cannot connect to database, access denied', true, 502);
+                header('HTTP/1.0 500 Cannot connect to database, access denied');
                 print "Cannot connect to database, access denied. Please check your configuration or contact the administrator.";
                 exit;
             case 2002:
-                header('Cannot connect to database, server not running', true, 503);
+                header('HTTP/1.0 500 Cannot connect to database, server not running');
                 print "Cannot connect to database, Sql server is not running. Please check your configuration or contact the administrator.";
                 exit;
             case 1040: # too many connections
-                header('Cannot connect to database, server too busy', true, 504);
+                header('HTTP/1.0 500 Cannot connect to database, server too busy');
                 print "Sorry, the server is currently too busy, please try again later.";
                 exit;
             case 2005: # "unknown host"
-                header('Cannot connect to database, unknown host', true, 505);
+                header('HTTP/1.0 500 Cannot connect to database, unknown host');
                 print "Unknown database host to connected to, please check your configuration";
                 exit;
             case 2006: # "gone away"
-                header('Cannot connect to database, server gone away', true, 506);
+                header('HTTP/1.0 500 Cannot connect to database, server gone away');
+                if ($compress || $secure) {
+                    print "Verify that your 'compress' or 'secure' setting for DB connections are supported by your database server.<br/>";
+                }
                 print "Sorry, the server is currently too busy, please try again later.";
                 exit;
             case 0:
@@ -59,19 +64,20 @@ function Sql_Connect($host, $user, $password, $database)
                 if (isset($GLOBALS['database_connection'])) {
                     print SQL_Error($GLOBALS['database_connection'], $errno);
                 } else {
-                    header('Cannot connect to database', true, 507);
+                    header('HTTP/1.0 500 Cannot connect to database');
                     print "Cannot connect to Database, please check your configuration";
                 }
         }
         exit;
     }
     if (!$db) {
-        header('Cannot connect to database', true, 508);
+        header('HTTP/1.0 500 Cannot connect to database');
         print "Cannot connect to Database, please check your configuration";
         exit;
     }
     mysqli_query($db, "SET NAMES 'utf8'");
     unset($GLOBALS['lastquery']);
+
     return $db;
 }
 
@@ -183,7 +189,7 @@ function Sql_Query($query, $ignore = 0)
         $end = $now["sec"] * 1000000 + $now["usec"];
         $elapsed = $end - $start;
         if ($elapsed > 300000) {
-            $query = substr($query, 0, 200);
+            $query = substr($query, 0, 2000);
             sqllog(' [' . $elapsed . '] ' . $query, "/tmp/phplist-sqltimer.log");
         } else {
 #      sqllog(' ['.$elapsed.'] '.$query,"/tmp/phplist-sqltimer.log");

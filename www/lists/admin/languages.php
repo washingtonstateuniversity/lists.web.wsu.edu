@@ -37,7 +37,7 @@ while ($lancode = readdir($d)) {
         $lan = array();
         foreach ($lines as $line) {
             // use utf8 matching
-            if (preg_match('/(\w+)=([\p{L}\p{N}&; \-\(\)]+)/u', $line, $regs)) {
+            if (preg_match('/(\w+)=([\p{L}\p{N}&\#; \-\(\)]+)/u', $line, $regs)) {
                 #      if (preg_match('/(\w+)=([\w&; \-\(\)]+)/',$line,$regs)) {
 #      if (preg_match('/(\w+)=(.+)/',$line,$regs)) {
                 $lan[$regs[1]] = $regs[2];
@@ -56,6 +56,7 @@ while ($lancode = readdir($d)) {
 #    print '<br/>'.$landir.'/'.$lancode;
     }
 }
+
 ## pick up other languages from DB
 if (Sql_table_exists('i18n')) {
     $req = Sql_Query(sprintf('select lan,translation from %s where 
@@ -68,11 +69,12 @@ if (Sql_table_exists('i18n')) {
 
 function lanSort($a, $b)
 {
-    return strcmp(strtolower($a[0]), strtolower($b[0]));
+    return strcmp(strtolower($a[3]), strtolower($b[3]));
 }
 
 uasort($LANGUAGES, 'lanSort');
-#var_dump($LANGUAGES);
+//print '<pre>';
+//var_dump($LANGUAGES);exit;
 
 if (!empty($GLOBALS['SessionTableName'])) {
     require_once dirname(__FILE__) . '/sessionlib.php';
@@ -332,6 +334,10 @@ class phplist_I18N
     {
         if (!isset($_SESSION['translations']) || !is_array($_SESSION['translations'])) {
             $_SESSION['translations'] = array();
+        }
+        // mark it as translated even if not, to avoid fetching it every time
+        if (empty($translation)) {
+            $translation = $text;
         }
         $_SESSION['translations'][$text] = array(
             'trans' => $translation,

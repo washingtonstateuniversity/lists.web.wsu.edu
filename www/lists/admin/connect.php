@@ -232,9 +232,9 @@ if (DEVVERSION) {
     $v = VERSION;
 }
 if (REGISTER) {
-    $PoweredByImage = '<p class="poweredby" style="text-align:center"><a style="display:inline-block;width:5%;max-width:120px;min-width:70px" href="https://www.phplist.com/poweredby?utm_source=pl' .$v. '&amp;utm_medium=poweredhostedimg&amp;utm_campaign=phpList" title="visit the phpList website" ><img src="' . PHPLIST_POWEREDBY_URLROOT.'/'.$v.'/power-phplist.png" width="100%" height="auto" title="powered by phpList version '.$v.', &copy; phpList ltd" alt="powered by phpList '.$v.', &copy; phpList ltd" border="0" /></a></p>';
+    $PoweredByImage = '<p class="poweredby" style="text-align:center"><a href="https://www.phplist.com/poweredby?utm_source=pl' .$v. '&amp;utm_medium=poweredhostedimg&amp;utm_campaign=phpList" title="visit the phpList website" ><img src="' . PHPLIST_POWEREDBY_URLROOT.'/'.$v.'/power-phplist.png" title="powered by phpList version '.$v.', &copy; phpList ltd" alt="powered by phpList '.$v.', &copy; phpList ltd" border="0" /></a></p>';
 } else {
-    $PoweredByImage = '<p class="poweredby" style="text-align:center"><a style="display:inline-block;width:5%;max-width:120px;min-width:70px" href="https://www.phplist.com/poweredby?utm_source=pl' .$v. '&amp;utm_medium=poweredlocalimg&amp;utm_campaign=phpList" title="visit the phpList website"><img src="images/power-phplist.png" width="100%" height="auto" title="powered by phpList version '.$v.', &copy; phpList ltd" alt="powered by phpList '.$v.', &copy; phpList ltd" border="0"/></a></p>';
+    $PoweredByImage = '<p class="poweredby" style="text-align:center"><a href="https://www.phplist.com/poweredby?utm_source=pl' .$v. '&amp;utm_medium=poweredlocalimg&amp;utm_campaign=phpList" title="visit the phpList website"><img src="images/power-phplist.png" title="powered by phpList version '.$v.', &copy; phpList ltd" alt="powered by phpList '.$v.', &copy; phpList ltd" border="0"/></a></p>';
 }
 $PoweredByText = '<div style="clear: both; font-family: arial, verdana, sans-serif; font-size: 8px; font-variant: small-caps; font-weight: normal; padding: 2px; padding-left:10px;padding-top:20px;">powered by <a href="https://www.phplist.com/poweredby?utm_source=download' . $v . '&amp;utm_medium=poweredtxt&amp;utm_campaign=phpList" target="_blank" title="powered by phpList version ' . $v . ', &copy; phpList ltd">phpList</a></div>';
 
@@ -469,7 +469,7 @@ function Fatal_Error($msg, $documentationURL = '')
         $_SESSION['fatalerror'] = 0;
     }
     ++$_SESSION['fatalerror'];
-    header('Fatal error', true, 509);
+    header('HTTP/1.0 509 Fatal error');
     if ($_SESSION['fatalerror'] > 5) {
         $_SESSION['logout_error'] = s('Too many errors, please login again');
         Redirect('logout&err=2');
@@ -1817,12 +1817,24 @@ function repeatMessage($msgid)
 
         return;
     }
-    foreach ($DBstruct['message'] as $column => $rec) {
-        if ($column != 'id' && $column != 'entered' && $column != 'sendstart') {
-            Sql_Query(sprintf('update %s set %s = "%s" where id = %d',
-                $GLOBALS['tables']['message'], $column, addslashes($msgdata[$column]), $newid));
-        }
+    
+    //  Do not copy columns that use default values or are explicitly set
+    $columnsToCopy = array_diff(
+        array_keys($DBstruct['message']),
+        array(
+            'id', 'entered', 'modified', 'embargo', 'status', 'sent', 'processed', 'astext', 'ashtml',
+            'astextandhtml', 'aspdf', 'astextandpdf', 'viewed', 'bouncecount', 'sendstart',
+        )
+    );
+
+    foreach ($columnsToCopy as $column) {
+        Sql_Query(sprintf('update %s set %s = "%s" where id = %d',
+            $GLOBALS['tables']['message'], $column, addslashes($msgdata[$column]), $newid));
     }
+    Sql_Query(sprintf('update %s set embargo = "%s",status = "submitted" where id = %d',
+        $GLOBALS['tables']['message'], $msgdata['newembargo'], $newid));
+
+    // copy rows in messagedata
     $req = Sql_Query(sprintf(
         "SELECT *
     FROM %s
@@ -1833,27 +1845,10 @@ function repeatMessage($msgid)
         setMessageData($newid, $row['name'], $row['data']);
     }
 
-    Sql_Query(sprintf('update %s set embargo = "%s",status = "submitted",sent = "" where id = %d',
-        $GLOBALS['tables']['message'], $msgdata['newembargo'], $newid));
-
     list($e['year'], $e['month'], $e['day'], $e['hour'], $e['minute'], $e['second']) =
         sscanf($msgdata['newembargo'], '%04d-%02d-%02d %02d:%02d:%02d');
     unset($e['second']);
     setMessageData($newid, 'embargo', $e);
-
-    foreach (array(
-                 'processed',
-                 'astext',
-                 'ashtml',
-                 'astextandhtml',
-                 'aspdf',
-                 'astextandpdf',
-                 'viewed',
-                 'bouncecount'
-             ) as $item) {
-        Sql_Query(sprintf('update %s set %s = 0 where id = %d',
-            $GLOBALS['tables']['message'], $item, $newid));
-    }
 
     # lists
     $req = Sql_Query(sprintf('select listid from %s where messageid = %d', $GLOBALS['tables']['listmessage'], $msgid));

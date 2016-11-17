@@ -257,8 +257,13 @@ if (isset($add)) {
     echo ActionResult($GLOBALS['I18N']->get('User added'));
 }
 
-$countpanel .= s('%s subscribers in total', $total);
-$countpanel .= '<br/>' . s('Subscribers with a red icon are either unconfirmed or blacklisted or both') . " ($totalunconfirmed)<br/>";
+// Make the totals human readable
+$totalFormatted = number_format( $total );
+$totalunconfirmedFormatted = number_format( $totalunconfirmed );
+
+// Add messages to panel
+$countpanel .= s('%s subscribers in total', $totalFormatted);
+$countpanel .= '<br/>' . s('Subscribers with a red icon are either unconfirmed or blacklisted or both') . " ($totalunconfirmedFormatted)<br/>";
 
 $url = getenv('REQUEST_URI');
 if ($unconfirmed) {
@@ -333,7 +338,8 @@ $listing = '';
 $dolist = 1;
 if (true || $total > MAX_USER_PP) {
     if (isset($start) && $start) {
-        $listing = sprintf($GLOBALS['I18N']->get('Listing user %d to %d'), $start, $start + MAX_USER_PP);
+        $totalUserCount = number_format( $start + MAX_USER_PP );
+        $listing = sprintf($GLOBALS['I18N']->get('Listing user %d to %d'), $start, $totalUserCount);
         $limit = "limit $start," . MAX_USER_PP;
     } else {
         if ($total < USERSPAGE_MAX || $searchdone) {
