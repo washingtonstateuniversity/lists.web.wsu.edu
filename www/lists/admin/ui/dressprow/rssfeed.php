@@ -71,21 +71,22 @@ if (isset($_SESSION['news'][$newsSize])) {
 
     return;
 }
-    
-include dirname(__FILE__) . '/onyx-rss.php';
-$rss = new ONYX_RSS();
-if( ! DEVVERSION ) {
-    $rss->setDebugMode(false);
-}
-$rss->setCachePath($GLOBALS['tmpdir']);
-$rss->setExpiryTime(1440);
-$parseresult = $rss->parse('https://www.phplist.org/newslist/feed/', 'phplistnews');
 
-if ($parseresult) {
-    $_SESSION['news']['short'] = buildNews($rss, 3);
-    $_SESSION['news']['long'] = buildNews($rss, 10);
-} else {
+// UCOMM Edit - Remove check of PHPList RSS feed
+//include dirname(__FILE__) . '/onyx-rss.php';
+//$rss = new ONYX_RSS();
+//if( ! DEVVERSION ) {
+//    $rss->setDebugMode(false);
+//}
+//$rss->setCachePath($GLOBALS['tmpdir']);
+//$rss->setExpiryTime(1440);
+//$parseresult = $rss->parse('https://www.phplist.org/newslist/feed/', 'phplistnews');
+
+//if ($parseresult) {
+//    $_SESSION['news']['short'] = buildNews($rss, 3);
+//    $_SESSION['news']['long'] = buildNews($rss, 10);
+//} else {
     $_SESSION['news']['short'] = '';
     $_SESSION['news']['long'] = '';
-}
+//}
 echo $_SESSION['news'][$newsSize];
