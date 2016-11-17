@@ -46,28 +46,42 @@ if ($id != $_GET['id']) {
 
 $track = base64_decode($id);
 $track = $track ^ XORmask;
-@list($msgtype, $fwdid, $messageid, $userid) = explode('|', $track);
-$userid = sprintf('%d', $userid);
-$fwdid = sprintf('%d', $fwdid);
-$messageid = sprintf('%d', $messageid);
 
+if (!preg_match('/^(H|T)\|([1-9]\d*)\|([1-9]\d*)\|([1-9]\d*)$/', $track, $matches)) {
+    FileNotFound();
+    exit;
+}
+$msgtype = $matches[1];
+$fwdid = $matches[2];
+$messageid = $matches[3];
+$userid = $matches[4];
 $linkdata = Sql_Fetch_array_query(sprintf('select * from %s where id = %d', $GLOBALS['tables']['linktrack_forward'],
     $fwdid));
 
-if (!$fwdid || $linkdata['id'] != $fwdid || !$userid || !$messageid) {
+if (!$linkdata) {
     ## try the old table to avoid breaking links
     $linkdata = Sql_Fetch_array_query(sprintf('select * from %s where linkid = %d and userid = %d and messageid = %d',
         $GLOBALS['tables']['linktrack'], $fwdid, $userid, $messageid));
     if (!empty($linkdata['forward'])) {
-        ## we're not recording clicks, but at least links in older newsletters won't break.
-        header('Location: ' . $linkdata['forward']);
+        ## we're not recording clicks, but at least links from older phpList versions won't break.
+        header('Location: ' . $linkdata['forward'], true, 303);
         exit;
     }
-
 #  echo 'Invalid Request';
     # maybe some logging?
     FileNotFound();
     exit;
+}
+
+$allowPersonalised = true;
+
+## verify that this subscriber actually received this message, otherwise they're not allowed
+## normal URLS on test messages, but block personalised ones
+$allowed = Sql_Fetch_Row_Query(sprintf('select userid from %s where userid = %d and messageid = %d',
+    $GLOBALS['tables']['usermessage'], $userid, $messageid));
+
+if (!$allowed) {
+    $allowPersonalised = !empty($_SESSION['adminloggedin']);
 }
 
 ## hmm a bit heavy to use here @@@optimise
@@ -91,7 +105,7 @@ if ($msgtype == 'H') {
     Sql_query(sprintf('update %s set htmlclicked = htmlclicked + 1 where forwardid = %d and messageid = %d',
         $GLOBALS['tables']['linktrack_ml'], $fwdid, $messageid));
     $trackingcode = 'utm_source=phplist' . $messageid . '&utm_medium=email&utm_content=HTML&utm_campaign=' . urlencode($messagedata['subject']);
-} elseif ($msgtype == 'T') {
+} else {
     Sql_query(sprintf('update %s set textclicked = textclicked + 1 where forwardid = %d and messageid = %d',
         $GLOBALS['tables']['linktrack_ml'], $fwdid, $messageid));
     $trackingcode = 'utm_source=phplist' . $messageid . '&utm_medium=email&utm_content=text&utm_campaign=' . urlencode($messagedata['subject']);
@@ -126,6 +140,10 @@ if ($msgtype == 'H') {
 
 $url = $linkdata['url'];
 if ($linkdata['personalise']) {
+    if (!$allowPersonalised) {
+        FileNotFound('<br/><i>' . s('Profile links in test campaigns only work when you are logged in as an administrator.') . '</i><br/>');
+    }
+
     $uid = Sql_Fetch_Row_Query(sprintf('select uniqid from %s where id = %d', $GLOBALS['tables']['user'], $userid));
     if ($uid[0]) {
         if (strpos($url, '?')) {
@@ -161,5 +179,5 @@ if (!empty($messagedata['google_track'])) {
     }
 }
 
-header('Location: ' . $url);
+header('Location: ' . $url, true, 303); ## use 303, because Location only uses 302, which gets indexed
 exit;

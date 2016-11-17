@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: phpList 2.11.X\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-22 05:48+0000\n"
-"PO-Revision-Date: 2015-11-08 10:45+0000\n"
+"POT-Creation-Date: 2016-10-30 06:48+0000\n"
+"PO-Revision-Date: 2016-07-29 12:43+0000\n"
 "Last-Translator: Nikita <tinman321@gmail.com>\n"
 "Language-Team: phpList <info@phplist.com>\n"
 "Language: ru\n"
@@ -18,8 +18,14 @@ msgstr ""
 "X-Poedit-SearchPath-0: public_html\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Basepath: /home/michiel/svn/phplist/translate/phplist\n"
-"X-POOTLE-MTIME: 1446979535.000000\n"
+"X-POOTLE-MTIME: 1469796199.000000\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;get;s\n"
+
+#: public_html/lists/lt.php:144
+msgid ""
+"Profile links in test campaigns only work when you are logged in as an "
+"administrator."
+msgstr ""
 
 #: public_html/lists/index.php:640
 #, php-format
@@ -60,42 +66,42 @@ msgstr ""
 msgid "Subscriber has been removed from blacklist"
 msgstr "Подписчик удалён из чёрного списка"
 
-#: public_html/lists/index.php:822
+#: public_html/lists/index.php:824
 msgid "Forwarded receiver requested blacklist"
 msgstr ""
 "Получатель переадресованного письма отправил запрос на добавление в чёрный "
 "список"
 
-#: public_html/lists/index.php:830
+#: public_html/lists/index.php:832
 msgid "\"Jump off\" used by subscriber, reason not requested"
 msgstr "Отказ от подписки без указания причины выбран пользователем"
 
-#: public_html/lists/index.php:832
+#: public_html/lists/index.php:834
 msgid "\"Jump off\" set, reason not requested"
 msgstr "Отказ от подписки без причины установлен"
 
-#: public_html/lists/index.php:1019
+#: public_html/lists/index.php:1021
 msgid ""
 "When testing the phpList forward functionality, you need to be logged in as "
 "an administrator."
 msgstr ""
 "При проверке функциональности phpList необходимо войти как администратор."
 
-#: public_html/lists/index.php:1106 public_html/lists/index.php:1117
+#: public_html/lists/index.php:1108 public_html/lists/index.php:1119
 msgid "Message Forwarded"
 msgstr "Сообщение переадресовано"
 
-#: public_html/lists/index.php:1107
+#: public_html/lists/index.php:1109
 #, php-format
 msgid "%s has forwarded message %d to %s"
 msgstr "%s переадресовал сообщение %d на адрес %s"
 
-#: public_html/lists/index.php:1118
+#: public_html/lists/index.php:1120
 #, php-format
 msgid "%s tried forwarding message %d to %s but failed"
 msgstr "Не удалось: %s попытался переадресовать сообщение %d на адрес %s"
 
-#: public_html/lists/index.php:1134
+#: public_html/lists/index.php:1136
 #, php-format
 msgid "Forward request from invalid user ID: %s"
 msgstr "Запрос переадресации от недействительного ID подписчика: %s"
@@ -346,7 +352,7 @@ msgstr "Просмотр, редактирование и добавление �
 
 #: public_html/lists/admin/home.php:147
 #: public_html/lists/admin/import4.php:118
-#: public_html/lists/admin/users.php:405
+#: public_html/lists/admin/users.php:411
 msgid "users"
 msgstr "Подписчики"
 
@@ -388,6 +394,7 @@ msgid "configure"
 msgstr "Конфигурация"
 
 #: public_html/lists/admin/home.php:187
+#: public_html/lists/admin/plugins.php:238
 msgid "Configure"
 msgstr "Конфигурация"
 
@@ -509,8 +516,6 @@ msgid "Process Bounces"
 msgstr "Обработать возвращённые письма"
 
 #: public_html/lists/admin/home.php:316
-#: public_html/lists/admin/processbounces.php:393
-#: public_html/lists/admin/processbounces.php:394
 #: public_html/lists/admin/reconcileusers.php:215
 #: public_html/lists/admin/reconcileusers.php:225
 #: public_html/lists/admin/reconcileusers.php:502
@@ -606,7 +611,7 @@ msgstr "Осталось"
 #: public_html/lists/admin/messages.php:82
 #: public_html/lists/admin/actions/msgstatus.php:74
 #: public_html/lists/admin/userhistory.php:114
-#: public_html/lists/admin/uclicks.php:124
+#: public_html/lists/admin/uclicks.php:133
 #: public_html/lists/admin/mviews.php:95
 #: public_html/lists/admin/mviews.php:207 public_html/databasestructure.php:63
 msgid "sent"
@@ -832,27 +837,27 @@ msgstr "Ноя"
 msgid "Dec"
 msgstr "Дек"
 
-#: public_html/lists/admin/connect.php:2033
+#: public_html/lists/admin/connect.php:2028
 msgid "years"
 msgstr "лет"
 
-#: public_html/lists/admin/connect.php:2036
+#: public_html/lists/admin/connect.php:2031
 msgid "days"
 msgstr "дн."
 
-#: public_html/lists/admin/connect.php:2039
+#: public_html/lists/admin/connect.php:2034
 msgid "hours"
 msgstr "ч."
 
-#: public_html/lists/admin/connect.php:2042
+#: public_html/lists/admin/connect.php:2037
 msgid "mins"
 msgstr "мин."
 
-#: public_html/lists/admin/connect.php:2045
+#: public_html/lists/admin/connect.php:2040
 msgid "secs"
 msgstr "сек."
 
-#: public_html/lists/admin/connect.php:2053
+#: public_html/lists/admin/connect.php:2048
 #: public_html/lists/admin/import4.php:177
 #: public_html/lists/admin/import4.php:186
 #: public_html/lists/admin/attributes.php:365
@@ -860,36 +865,36 @@ msgstr "сек."
 msgid "Attribute"
 msgstr "Атрибут"
 
-#: public_html/lists/admin/connect.php:2053
+#: public_html/lists/admin/connect.php:2048
 msgid "Placeholder"
 msgstr "Метка"
 
-#: public_html/lists/admin/connect.php:2133
+#: public_html/lists/admin/connect.php:2128
 #, php-format
 msgid "Listing %d to %d of %d"
 msgstr "Перечислены с %d по %d из %d."
 
-#: public_html/lists/admin/connect.php:2135
+#: public_html/lists/admin/connect.php:2130
 #, php-format
 #, php-format, php-format
 msgid "Listing %d to %d"
 msgstr "Список от %d до %d"
 
-#: public_html/lists/admin/connect.php:2150
+#: public_html/lists/admin/connect.php:2145
 msgid "First Page"
 msgstr "Первая страница"
 
-#: public_html/lists/admin/connect.php:2151
+#: public_html/lists/admin/connect.php:2146
 #: public_html/lists/admin/inc/interfacelib.php:837
 msgid "Previous"
 msgstr "Предыдущий"
 
-#: public_html/lists/admin/connect.php:2153
+#: public_html/lists/admin/connect.php:2148
 #: public_html/lists/admin/inc/interfacelib.php:878
 msgid "Next"
 msgstr "Далее"
 
-#: public_html/lists/admin/connect.php:2155
+#: public_html/lists/admin/connect.php:2150
 msgid "Last Page"
 msgstr "Последняя страница"
 
@@ -1046,26 +1051,31 @@ msgstr "Подробнее"
 msgid "Documentation Page"
 msgstr "Справочная страница"
 
-#: public_html/lists/admin/plugins.php:234
 #: public_html/lists/admin/plugins.php:239
+#: public_html/lists/admin/configure.php:123
+msgid "settings"
+msgstr "параметры"
+
+#: public_html/lists/admin/plugins.php:243
+#: public_html/lists/admin/plugins.php:248
 msgid "enabled"
 msgstr "Состояние"
 
-#: public_html/lists/admin/plugins.php:235
+#: public_html/lists/admin/plugins.php:244
 #: public_html/lists/admin/bouncerules.php:102
 msgid "action"
 msgstr "Выбрать действие"
 
-#: public_html/lists/admin/plugins.php:245
+#: public_html/lists/admin/plugins.php:254
 msgid "initialise"
 msgstr "Инициализация"
 
-#: public_html/lists/admin/plugins.php:247
+#: public_html/lists/admin/plugins.php:256
 msgid "Initialise"
 msgstr "Инициализация"
 
-#: public_html/lists/admin/plugins.php:253
-#: public_html/lists/admin/plugins.php:254
+#: public_html/lists/admin/plugins.php:262
+#: public_html/lists/admin/plugins.php:263
 #: public_html/lists/admin/templates.php:40
 #: public_html/lists/admin/templates.php:41
 #: public_html/lists/admin/spage.php:75
@@ -1075,38 +1085,38 @@ msgstr "Инициализация"
 msgid "delete"
 msgstr "удалить"
 
-#: public_html/lists/admin/plugins.php:254
+#: public_html/lists/admin/plugins.php:263
 msgid "delete this plugin"
 msgstr "удалить подключаемый модуль"
 
-#: public_html/lists/admin/plugins.php:257
+#: public_html/lists/admin/plugins.php:266
 msgid "Dependency check"
 msgstr "Проверка зависимостей"
 
-#: public_html/lists/admin/plugins.php:260
+#: public_html/lists/admin/plugins.php:269
 #, php-format
 msgid "Plugin can not be enabled, because \"%s\" is enabled."
 msgstr "Невозможно подключить модуль, так как включен модуль \"%s\"."
 
-#: public_html/lists/admin/plugins.php:263
+#: public_html/lists/admin/plugins.php:272
 msgid "Plugin can not be enabled."
 msgstr "Невозможно подключить модуль."
 
-#: public_html/lists/admin/plugins.php:263
+#: public_html/lists/admin/plugins.php:272
 #, php-format
 msgid "Failure on system requirement <strong>%s</strong>"
 msgstr "Системные требования не соблюдены <strong>%s</strong>"
 
-#: public_html/lists/admin/plugins.php:271
+#: public_html/lists/admin/plugins.php:280
 msgid "update this plugin"
 msgstr "обновить плагин"
 
-#: public_html/lists/admin/plugins.php:271
-#: public_html/lists/admin/plugins.php:272
+#: public_html/lists/admin/plugins.php:280
+#: public_html/lists/admin/plugins.php:281
 msgid "update"
 msgstr "Обновить"
 
-#: public_html/lists/admin/plugins.php:275
+#: public_html/lists/admin/plugins.php:284
 msgid "details"
 msgstr "Подробности"
 
@@ -1182,87 +1192,87 @@ msgstr "Ключ для смены пароля был отправлен на �
 msgid "Error sending password change token"
 msgstr "При отправке ключа для смены пароля произошла ошибка"
 
-#: public_html/lists/admin/lib.php:643
+#: public_html/lists/admin/lib.php:639
 #: public_html/lists/admin/actions/msgstatus.php:81
 #: public_html/lists/admin/bounces.php:152
 #: public_html/lists/admin/bounces.php:170
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: public_html/lists/admin/lib.php:654
+#: public_html/lists/admin/lib.php:650
 msgid "very little time"
 msgstr "незначительное время"
 
-#: public_html/lists/admin/lib.php:711
+#: public_html/lists/admin/lib.php:707
 msgid "This is the Newsletter Subject"
 msgstr "Тема для новостной рассылки"
 
-#: public_html/lists/admin/lib.php:881 public_html/lists/admin/lib.php:885
+#: public_html/lists/admin/lib.php:878 public_html/lists/admin/lib.php:882
 #, php-format
 msgid ""
 "A process for this page is already running and it was still alive %d seconds "
 "ago"
 msgstr "Процесс уже запущен и выполняется, последняя проверка %d сек. назад"
 
-#: public_html/lists/admin/lib.php:887
+#: public_html/lists/admin/lib.php:884
 msgid ""
 "Running commandline, quitting. We'll find out what to do in the next run."
 msgstr ""
 "Командная строка... выход. Что выполнять будет выяснено при следующем "
 "запуске."
 
-#: public_html/lists/admin/lib.php:890
+#: public_html/lists/admin/lib.php:887
 msgid "Sleeping for 20 seconds, aborting will quit"
 msgstr "Ожидание в течение 20-и секунд, выход из прерывания"
 
-#: public_html/lists/admin/lib.php:898
+#: public_html/lists/admin/lib.php:895
 msgid ""
 "We have been waiting too long, I guess the other process is still going ok"
 msgstr "Прошло слишком много времени, думаю другой процесс находится в действии"
 
-#: public_html/lists/admin/lib.php:1679 public_html/lists/admin/lib.php:1684
+#: public_html/lists/admin/lib.php:1676 public_html/lists/admin/lib.php:1681
 msgid "Error, incorrect session token"
 msgstr "Ошибка: неверный ключ сессии"
 
-#: public_html/lists/admin/lib.php:1949
+#: public_html/lists/admin/lib.php:1946
 msgid "Remote queue processing has been activated successfully"
 msgstr "Удалённая отправка очереди запущена"
 
-#: public_html/lists/admin/lib.php:1950
+#: public_html/lists/admin/lib.php:1947
 #: public_html/lists/admin/send_core.php:385
 msgid "view progress"
 msgstr "Просмотреть ход выполнения"
 
-#: public_html/lists/admin/lib.php:1952 public_html/lists/admin/lib.php:1963
+#: public_html/lists/admin/lib.php:1949 public_html/lists/admin/lib.php:1960
 msgid "Error activating remote queue processing"
 msgstr "При запуске удалённой отправки очереди возникла ошибка"
 
-#: public_html/lists/admin/lib.php:1954
+#: public_html/lists/admin/lib.php:1951
 msgid "The API key is incorrect"
 msgstr "Неправильный ключ API"
 
-#: public_html/lists/admin/lib.php:1956
+#: public_html/lists/admin/lib.php:1953
 msgid "The phpList.com server is unable to reach your phpList installation"
 msgstr "Сервер phpList.com не получил доступа к Вашей установке phpList"
 
-#: public_html/lists/admin/lib.php:1958
+#: public_html/lists/admin/lib.php:1955
 msgid "Unknown error"
 msgstr "Неизвестная ошибка"
 
-#: public_html/lists/admin/lib.php:1960
+#: public_html/lists/admin/lib.php:1957
 #: public_html/lists/admin/processqueue.php:99
 msgid "Change settings"
 msgstr "Изменить параметры"
 
-#: public_html/lists/admin/lib.php:1961 public_html/lists/admin/lib.php:1964
+#: public_html/lists/admin/lib.php:1958 public_html/lists/admin/lib.php:1961
 msgid "Run queue locally"
 msgstr "Запустить локальную обработку очереди"
 
-#: public_html/lists/admin/lib.php:1977
+#: public_html/lists/admin/lib.php:1974
 msgid "Sign up to receive news and updates about phpList "
 msgstr "Подпишитесь, чтобы получать новости и обновления phpList"
 
-#: public_html/lists/admin/lib.php:1978
+#: public_html/lists/admin/lib.php:1975
 msgid ""
 "to make sure you are updated when new versions come out. Sometimes security "
 "bugs are found which make it important to upgrade. Traffic on the list is "
@@ -1272,11 +1282,11 @@ msgstr ""
 "исправляются обнаруженные ошибки безопасности, размер обновления достаточно "
 "низкий."
 
-#: public_html/lists/admin/lib.php:1984
+#: public_html/lists/admin/lib.php:1981
 msgid "Subscribe"
 msgstr "Подписаться"
 
-#: public_html/lists/admin/lib.php:1984
+#: public_html/lists/admin/lib.php:1981
 msgid "Do not subscribe"
 msgstr "Не подписываться"
 
@@ -1293,8 +1303,8 @@ msgstr "У вас нет доступа к этой странице"
 #: public_html/lists/admin/statsoverview.php:66
 #: public_html/lists/admin/mclicks.php:105
 #: public_html/lists/admin/domainstats.php:148
-#: public_html/lists/admin/uclicks.php:67
-#: public_html/lists/admin/uclicks.php:77
+#: public_html/lists/admin/uclicks.php:76
+#: public_html/lists/admin/uclicks.php:86
 #: public_html/lists/admin/mviews.php:56
 #: public_html/lists/admin/mviews.php:136
 msgid "Download as CSV file"
@@ -1305,7 +1315,7 @@ msgid "There are currently no campaigns to view"
 msgstr "Нет доступных для просмотра кампаний"
 
 #: public_html/lists/admin/statsoverview.php:110
-#: public_html/lists/admin/users.php:465
+#: public_html/lists/admin/users.php:471
 msgid "bncs"
 msgstr "Возвраты"
 
@@ -1322,15 +1332,15 @@ msgid "views"
 msgstr "открытий"
 
 #: public_html/lists/admin/statsoverview.php:118
-#: public_html/lists/admin/userclicks.php:204
+#: public_html/lists/admin/userclicks.php:248
 #: public_html/lists/admin/mclicks.php:91
 #: public_html/lists/admin/mclicks.php:191
 #: public_html/lists/admin/mclicks.php:213
 #: public_html/lists/admin/userhistory.php:107
 #: public_html/lists/admin/userhistory.php:110
-#: public_html/lists/admin/uclicks.php:58
-#: public_html/lists/admin/uclicks.php:130
-#: public_html/lists/admin/uclicks.php:144
+#: public_html/lists/admin/uclicks.php:67
+#: public_html/lists/admin/uclicks.php:139
+#: public_html/lists/admin/uclicks.php:153
 msgid "clicks"
 msgstr "Переходы"
 
@@ -1368,7 +1378,7 @@ msgstr "Кампания не найдена"
 #: public_html/lists/admin/send_core.php:730
 #: public_html/lists/admin/userclicks.php:84
 #: public_html/lists/admin/userclicks.php:103
-#: public_html/lists/admin/userclicks.php:130
+#: public_html/lists/admin/userclicks.php:140
 #: public_html/lists/admin/mclicks.php:132
 #: public_html/lists/admin/spageedit.php:277
 #: public_html/lists/admin/spageedit.php:284
@@ -1622,7 +1632,7 @@ msgstr "Нет подписчиков для копирования, прове�
 #: public_html/lists/admin/import4.php:126
 #: public_html/lists/admin/actions/import1.php:217
 #: public_html/lists/admin/import3.php:514
-#: public_html/lists/admin/users.php:445
+#: public_html/lists/admin/users.php:451
 msgid "lists"
 msgstr "Списки рассылок"
 
@@ -1810,8 +1820,9 @@ msgid "Cannot open mailbox file"
 msgstr "Не удалось открыть файл почтового ящика"
 
 #: public_html/lists/admin/processbounces.php:389
-msgid "bounces to fetch from the mailbox"
-msgstr "Загрузить возвращённые письма из почтового ящика"
+#, php-format
+msgid "%d bounces to fetch from the mailbox"
+msgstr ""
 
 #: public_html/lists/admin/processbounces.php:390
 #: public_html/lists/admin/readtestmail.php:240
@@ -1819,17 +1830,15 @@ msgid "Please do not interrupt this process"
 msgstr "Не прерывайте обработку"
 
 #: public_html/lists/admin/processbounces.php:391
-msgid "bounces to process"
-msgstr "Возвращённые письма для обработки"
+#, php-format
+msgid "%d bounces to process"
+msgstr ""
 
 #: public_html/lists/admin/processbounces.php:393
-#: public_html/lists/admin/readtestmail.php:242
-msgid "Processing first"
-msgstr "Обработка в первую очередь"
-
 #: public_html/lists/admin/processbounces.php:394
-msgid "processing first"
-msgstr "Обработка в первую очередь"
+#, php-format
+msgid "Processing first %d bounces"
+msgstr ""
 
 #: public_html/lists/admin/processbounces.php:398
 msgid "Running in test mode, not deleting messages from mailbox"
@@ -1875,116 +1884,124 @@ msgstr "Проверка"
 msgid "Bounce mechanism not properly configured"
 msgstr "Обработка возвращённых писем настроена неверно"
 
-#: public_html/lists/admin/processbounces.php:483
+#: public_html/lists/admin/processbounces.php:464
+msgid "Force set, killing other send processes"
+msgstr ""
+
+#: public_html/lists/admin/processbounces.php:484
 msgid "bounce_protocol not supported"
 msgstr ""
 "Протокол обработки возвращённых писем (bounce_protocol) не поддерживается"
 
-#: public_html/lists/admin/processbounces.php:497
+#: public_html/lists/admin/processbounces.php:490
+msgid "Download failed, exiting"
+msgstr ""
+
+#: public_html/lists/admin/processbounces.php:502
 #, php-format
 msgid "%d bounces to reprocess"
 msgstr "Возвращённые письма для повторной обработки - %d"
 
-#: public_html/lists/admin/processbounces.php:501
-#: public_html/lists/admin/processbounces.php:513
+#: public_html/lists/admin/processbounces.php:506
+#: public_html/lists/admin/processbounces.php:518
 #, php-format
 msgid "%d out of %d processed"
 msgstr "%d из %d обработано"
 
-#: public_html/lists/admin/processbounces.php:515
+#: public_html/lists/admin/processbounces.php:520
 #, php-format
 msgid "%d bounces were re-processed and %d bounces were re-identified"
 msgstr "Возвращённые письма: повторно обработано - %d, переопределено - %d"
 
-#: public_html/lists/admin/processbounces.php:520
+#: public_html/lists/admin/processbounces.php:525
 msgid "Processing bounces based on active bounce rules"
 msgstr "Обработка возвращённых писем по действующим правилам"
 
-#: public_html/lists/admin/processbounces.php:534
+#: public_html/lists/admin/processbounces.php:539
 #, php-format
 msgid "processed %d out of %d bounces for advanced bounce rules"
 msgstr "по расширенным правилам обработано возвратов: %d из %d"
 
-#: public_html/lists/admin/processbounces.php:543
+#: public_html/lists/admin/processbounces.php:548
 #: public_html/lists/admin/actions/processqueue.php:968
 #: public_html/lists/admin/generatebouncerules.php:50
 msgid "Process Killed by other process"
 msgstr "Обработка остановлена другим процессом"
 
-#: public_html/lists/admin/processbounces.php:580
-#: public_html/lists/admin/processbounces.php:758
+#: public_html/lists/admin/processbounces.php:585
+#: public_html/lists/admin/processbounces.php:759
 msgid "Auto Unconfirmed"
 msgstr "Автоматически отмечен как &laquo;неподтверждённый&raquo;"
 
-#: public_html/lists/admin/processbounces.php:581
-#: public_html/lists/admin/processbounces.php:602
+#: public_html/lists/admin/processbounces.php:586
+#: public_html/lists/admin/processbounces.php:607
 msgid "Subscriber auto unconfirmed for"
 msgstr ""
 "Подписчик автоматически отмечен как &laquo;неподтверждённый&raquo;, т.к."
 
-#: public_html/lists/admin/processbounces.php:581
-#: public_html/lists/admin/processbounces.php:602
-#: public_html/lists/admin/processbounces.php:615
-#: public_html/lists/admin/processbounces.php:627
-#: public_html/lists/admin/processbounces.php:640
-#: public_html/lists/admin/processbounces.php:652
+#: public_html/lists/admin/processbounces.php:586
+#: public_html/lists/admin/processbounces.php:607
+#: public_html/lists/admin/processbounces.php:620
+#: public_html/lists/admin/processbounces.php:632
+#: public_html/lists/admin/processbounces.php:645
+#: public_html/lists/admin/processbounces.php:657
 msgid "bounce rule"
 msgstr "Правило обработки возвращённых писем"
 
-#: public_html/lists/admin/processbounces.php:601
+#: public_html/lists/admin/processbounces.php:606
 msgid "Auto unconfirmed"
 msgstr "Автоматически отмечен как &laquo;неподтверждённый&raquo;"
 
-#: public_html/lists/admin/processbounces.php:610
+#: public_html/lists/admin/processbounces.php:615
 msgid "Subscriber auto blacklisted  by bounce rule"
 msgstr "По правилу возвратов подписчик перенесён в чёрный список "
 
-#: public_html/lists/admin/processbounces.php:614
-#: public_html/lists/admin/processbounces.php:626
-#: public_html/lists/admin/processbounces.php:639
-#: public_html/lists/admin/processbounces.php:651
+#: public_html/lists/admin/processbounces.php:619
+#: public_html/lists/admin/processbounces.php:631
+#: public_html/lists/admin/processbounces.php:644
+#: public_html/lists/admin/processbounces.php:656
 msgid "Auto Unsubscribed"
 msgstr "Автоматически отписан"
 
-#: public_html/lists/admin/processbounces.php:615
-#: public_html/lists/admin/processbounces.php:627
-#: public_html/lists/admin/processbounces.php:652
+#: public_html/lists/admin/processbounces.php:620
+#: public_html/lists/admin/processbounces.php:632
+#: public_html/lists/admin/processbounces.php:657
 msgid "User auto unsubscribed for"
 msgstr "Подписчик автоматически отписан, т.к."
 
-#: public_html/lists/admin/processbounces.php:622
+#: public_html/lists/admin/processbounces.php:627
 #, php-format
 msgid "Subscriber auto blacklisted by bounce rule %d"
 msgstr "Подписчик перенесён в чёрный список по правилу %d"
 
-#: public_html/lists/admin/processbounces.php:635
-#: public_html/lists/admin/processbounces.php:647
+#: public_html/lists/admin/processbounces.php:640
+#: public_html/lists/admin/processbounces.php:652
 #, php-format
 msgid "Email address auto blacklisted by bounce rule %d"
 msgstr "Электронный адрес перенесён в чёрный список по правилу %d"
 
-#: public_html/lists/admin/processbounces.php:640
+#: public_html/lists/admin/processbounces.php:645
 msgid "email auto unsubscribed for"
 msgstr "Эл. адрес автоматически отписан, т.к."
 
-#: public_html/lists/admin/processbounces.php:667
+#: public_html/lists/admin/processbounces.php:672
 msgid "bounces processed by advanced processing"
 msgstr "возвращённых писем обработано по расширенным правилам"
 
-#: public_html/lists/admin/processbounces.php:668
+#: public_html/lists/admin/processbounces.php:673
 msgid "bounces were not matched by advanced processing rules"
 msgstr "возвращённых писем не соответствующих расширенным правилам обработки"
 
-#: public_html/lists/admin/processbounces.php:672
+#: public_html/lists/admin/processbounces.php:677
 msgid "Identifying consecutive bounces"
 msgstr "Определение серии возвращённых писем"
 
-#: public_html/lists/admin/processbounces.php:686
+#: public_html/lists/admin/processbounces.php:687
 #: public_html/lists/admin/cron.php:58
 msgid "Nothing to do"
 msgstr "Нет заданий"
 
-#: public_html/lists/admin/processbounces.php:755
+#: public_html/lists/admin/processbounces.php:756
 #, php-format
 msgid ""
 "User (url:%s) has consecutive bounces (%d) over threshold (%d), user marked "
@@ -1993,48 +2010,46 @@ msgstr ""
 "У подписчика (url:%s) есть серия возвращённых писем (в количечестве - %d) "
 "при установленном пороге (%d), он отмечен как &laquo;неподтверждённый&raquo;."
 
-#: public_html/lists/admin/processbounces.php:759
+#: public_html/lists/admin/processbounces.php:760
 #, php-format
 msgid "Subscriber auto unconfirmed for %d consecutive bounces"
 msgstr ""
 " Подписчик автоматически помечен как &laquo;неподтверждённый&raquo; из-за "
 "серии возвращённых писем (кол-во - %d)"
 
-#: public_html/lists/admin/processbounces.php:769
+#: public_html/lists/admin/processbounces.php:770
 #, php-format
 msgid "%d consecutive bounces, threshold reached, blacklisting subscriber"
 msgstr ""
 "Возвращённых писем в серии - %d, порог достигнут, подписчик помещён в чёрный "
 "список"
 
-#: public_html/lists/admin/processbounces.php:770
+#: public_html/lists/admin/processbounces.php:771
 #, php-format
 msgid "%d consecutive bounces, threshold reached"
 msgstr "Возвращённых писем в серии - %d, порог превышен"
 
-#: public_html/lists/admin/processbounces.php:782
+#: public_html/lists/admin/processbounces.php:783
 #, php-format
 msgid "processed %d out of %d subscribers"
 msgstr "Обработано подписчиков %d из %d"
 
-#: public_html/lists/admin/processbounces.php:789
+#: public_html/lists/admin/processbounces.php:790
 #, php-format
 msgid "total of %d subscribers processed"
 msgstr "Всего обработано подписчиков - %d"
 
-#: public_html/lists/admin/processbounces.php:794
+#: public_html/lists/admin/processbounces.php:795
 msgid "Report of advanced bounce processing:"
 msgstr "Отчёт об обработке по расширенным правилам:"
 
-#: public_html/lists/admin/processbounces.php:797
+#: public_html/lists/admin/processbounces.php:798
 msgid ""
-"Below are users who have been marked unconfirmed. The in () is the number of "
-"consecutive bounces."
+"Below are users who have been marked unconfirmed. The number in () is the "
+"number of consecutive bounces."
 msgstr ""
-"Ниже приведены подписчики, которые были помечены как неподтвержденные. В "
-"скобках число последовательных возвращённых писем в серии."
 
-#: public_html/lists/admin/processbounces.php:801
+#: public_html/lists/admin/processbounces.php:802
 msgid "Report:"
 msgstr "Отчёт:"
 
@@ -2624,10 +2639,6 @@ msgstr "Изменения не сохранены"
 msgid "Categories saved"
 msgstr "Категории сохранены"
 
-#: public_html/lists/admin/configure.php:123
-msgid "settings"
-msgstr "параметры"
-
 #: public_html/lists/admin/configure.php:135
 #: public_html/lists/admin/actions/configure.php:64
 #: public_html/lists/admin/user.php:387
@@ -2804,7 +2815,7 @@ msgstr "Выберите кампанию"
 #: public_html/lists/admin/msgbounces.php:12
 #: public_html/lists/admin/message.php:98
 #: public_html/lists/admin/eventlog.php:109
-#: public_html/lists/admin/userclicks.php:184
+#: public_html/lists/admin/userclicks.php:229
 msgid "message"
 msgstr "Сообщение"
 
@@ -2850,7 +2861,7 @@ msgstr "Редактировать список"
 #: public_html/lists/admin/members.php:80
 #: public_html/lists/admin/userclicks.php:89
 #: public_html/lists/admin/userclicks.php:117
-#: public_html/lists/admin/userclicks.php:137
+#: public_html/lists/admin/userclicks.php:147
 msgid "Download subscribers"
 msgstr "Экспортировать список"
 
@@ -3163,7 +3174,7 @@ msgid "Purpose"
 msgstr "Назначение"
 
 #: public_html/lists/admin/messages.php:10
-#: public_html/lists/admin/users.php:315
+#: public_html/lists/admin/users.php:320
 msgid "Sort by"
 msgstr "Сортировать по признаку"
 
@@ -3186,7 +3197,7 @@ msgstr "по убыванию"
 #: public_html/lists/admin/messages.php:382
 #: public_html/lists/admin/userclicks.php:85
 #: public_html/lists/admin/userclicks.php:105
-#: public_html/lists/admin/userclicks.php:131
+#: public_html/lists/admin/userclicks.php:141
 #: public_html/lists/admin/mclicks.php:133
 #: public_html/lists/admin/mviews.php:143 public_html/databasestructure.php:17
 #: public_html/databasestructure.php:34 public_html/databasestructure.php:44
@@ -3205,7 +3216,7 @@ msgstr "Запрет на отправку"
 #: public_html/lists/admin/messages.php:393
 #: public_html/lists/admin/userclicks.php:86
 #: public_html/lists/admin/userclicks.php:106
-#: public_html/lists/admin/userclicks.php:132
+#: public_html/lists/admin/userclicks.php:142
 #: public_html/lists/admin/mviews.php:144
 msgid "Sent"
 msgstr "Отправлено"
@@ -3220,7 +3231,7 @@ msgstr "статические"
 
 #: public_html/lists/admin/messages.php:130
 #: public_html/lists/admin/admins.php:105
-#: public_html/lists/admin/users.php:318 public_html/lists/admin/users.php:386
+#: public_html/lists/admin/users.php:323 public_html/lists/admin/users.php:392
 msgid "Go"
 msgstr "Применить"
 
@@ -3284,7 +3295,7 @@ msgstr "Кампании"
 
 #: public_html/lists/admin/messages.php:395
 #: public_html/lists/admin/bouncerule.php:69
-#: public_html/lists/admin/userclicks.php:199
+#: public_html/lists/admin/userclicks.php:243
 #: public_html/lists/admin/bounce.php:223 public_html/databasestructure.php:61
 msgid "Status"
 msgstr "Состояние"
@@ -3309,16 +3320,16 @@ msgstr "Время на отправку"
 #: public_html/lists/admin/domainstats.php:184
 #: public_html/lists/admin/domainstats.php:260
 #: public_html/lists/admin/domainstats.php:289
-#: public_html/lists/admin/uclicks.php:138
-#: public_html/lists/admin/uclicks.php:139
-#: public_html/lists/admin/uclicks.php:144
-#: public_html/lists/admin/uclicks.php:146
+#: public_html/lists/admin/uclicks.php:147
+#: public_html/lists/admin/uclicks.php:148
+#: public_html/lists/admin/uclicks.php:153
+#: public_html/lists/admin/uclicks.php:155
 msgid "total"
 msgstr "Итого"
 
 #: public_html/lists/admin/messages.php:455
 #: public_html/lists/admin/send_core.php:834
-#: public_html/lists/admin/userclicks.php:208
+#: public_html/lists/admin/userclicks.php:252
 #: public_html/lists/admin/mclicks.php:95
 #: public_html/lists/admin/mclicks.php:198
 msgid "text"
@@ -3891,7 +3902,7 @@ msgid "filename"
 msgstr "имя файла"
 
 #: public_html/lists/admin/send_core.php:938
-#: public_html/lists/admin/users.php:316
+#: public_html/lists/admin/users.php:321
 msgid "desc"
 msgstr "по убыванию"
 
@@ -3938,7 +3949,6 @@ msgid "Description of attachment"
 msgstr "Описание вложения"
 
 #: public_html/lists/admin/send_core.php:992
-#, fuzzy
 msgid "to email address(es)"
 msgstr "на адрес(а) эл. почты"
 
@@ -3996,7 +4006,7 @@ msgstr "Отсутствует содержимое письма"
 
 #: public_html/lists/admin/send_core.php:1242
 msgid "Incorrect URL for sending"
-msgstr ""
+msgstr "Неверная ссылка для отправки"
 
 #: public_html/lists/admin/send_core.php:1251
 msgid "From missing"
@@ -4055,13 +4065,13 @@ msgid "What is the type of information you want to check"
 msgstr "Какой тип данных необходимо проверить"
 
 #: public_html/lists/admin/usercheck.php:42
-#: public_html/lists/admin/users.php:375 public_html/databasestructure.php:27
+#: public_html/lists/admin/users.php:381 public_html/databasestructure.php:27
 #: public_html/databasestructure.php:28
 msgid "Foreign Key"
 msgstr "Внешний ключ"
 
 #: public_html/lists/admin/usercheck.php:43
-#: public_html/lists/admin/users.php:372 public_html/databasestructure.php:12
+#: public_html/lists/admin/users.php:378 public_html/databasestructure.php:12
 #: public_html/databasestructure.php:85 public_html/databasestructure.php:87
 #: public_html/databasestructure.php:132
 msgid "Email"
@@ -4516,12 +4526,12 @@ msgstr "Всё завершено"
 
 #: public_html/lists/admin/actions/addemail.php:14
 msgid "That is not a valid email address"
-msgstr ""
+msgstr "Неверный адрес электронной почты"
 
 #: public_html/lists/admin/actions/addemail.php:19
 #, php-format
 msgid "Added by %s"
-msgstr ""
+msgstr "Добавил: %s"
 
 #: public_html/lists/admin/actions/addemail.php:19
 msgid "Added with add-email on test"
@@ -5397,7 +5407,7 @@ msgstr ""
 msgid "Import"
 msgstr "Импортировать"
 
-#: public_html/lists/admin/languages.php:645
+#: public_html/lists/admin/languages.php:651
 msgid "over treshold, user marked unconfirmed"
 msgstr "Порог превышен, подписчик отмечен как &laquo;неподтверждённый&raquo;"
 
@@ -6014,12 +6024,12 @@ msgstr ""
 "Для избежания перегрузки системы одновременно будет преобразовываться 10000 "
 "записей"
 
-#: public_html/lists/admin/class.phplistmailer.php:286
+#: public_html/lists/admin/class.phplistmailer.php:292
 #, php-format
 msgid "Error sending email to %s"
 msgstr "Ошибка отправки письма подписчику %s"
 
-#: public_html/lists/admin/class.phplistmailer.php:291
+#: public_html/lists/admin/class.phplistmailer.php:297
 #, php-format
 msgid "Error, empty message-body sending email to %s"
 msgstr "Ошибка: отсутствует содержимое письма, отправляемого на %s"
@@ -6304,7 +6314,7 @@ msgstr ""
 
 #: public_html/lists/admin/userclicks.php:82
 #: public_html/lists/admin/userclicks.php:100
-#: public_html/lists/admin/userclicks.php:127
+#: public_html/lists/admin/userclicks.php:137
 #: public_html/lists/admin/spageedit.php:187
 #: public_html/databasestructure.php:107 public_html/databasestructure.php:154
 msgid "Title"
@@ -6315,7 +6325,7 @@ msgid "Subscriber clicks on a campaign"
 msgstr "Переходы по ссылкам в кампании"
 
 #: public_html/lists/admin/userclicks.php:96
-#: public_html/lists/admin/userclicks.php:145
+#: public_html/lists/admin/userclicks.php:165
 msgid "Subscriber"
 msgstr "Подписчик"
 
@@ -6328,43 +6338,43 @@ msgstr "Подписчики, перешедшие по ссылке"
 msgid "Subscribers who clicked on the URL \"%s\" across all campaigns"
 msgstr "Подписчики, перешедшие по ссылке \"%s\" среди всех кампаниях"
 
-#: public_html/lists/admin/userclicks.php:124
+#: public_html/lists/admin/userclicks.php:134
 msgid "Subscribers who clicked a campaign"
 msgstr "Подписчики, перешедшие по ссылкам в кампании"
 
-#: public_html/lists/admin/userclicks.php:134
+#: public_html/lists/admin/userclicks.php:144
 #, php-format
 msgid "Subscribers who clicked on campaign with subject \"%s\", sent %s"
 msgstr ""
 "Подписчикам, которые перешли по ссылкам в кампании \"%s\", отправлено %s"
 
-#: public_html/lists/admin/userclicks.php:144
+#: public_html/lists/admin/userclicks.php:164
 msgid "Clicks of a subscriber"
 msgstr "Переходы подписчика"
 
-#: public_html/lists/admin/userclicks.php:161
+#: public_html/lists/admin/userclicks.php:199
 #: public_html/lists/admin/mclicks.php:135
-#: public_html/lists/admin/users.php:349
+#: public_html/lists/admin/users.php:355
 msgid "Subscribers"
 msgstr "Подписчики"
 
-#: public_html/lists/admin/userclicks.php:194
+#: public_html/lists/admin/userclicks.php:238
 msgid "view user"
 msgstr "посмотреть подписчика"
 
-#: public_html/lists/admin/userclicks.php:202
+#: public_html/lists/admin/userclicks.php:246
 #: public_html/lists/admin/mclicks.php:201
-#: public_html/lists/admin/uclicks.php:121
+#: public_html/lists/admin/uclicks.php:130
 msgid "firstclick"
 msgstr "первый"
 
-#: public_html/lists/admin/userclicks.php:203
+#: public_html/lists/admin/userclicks.php:247
 #: public_html/lists/admin/mclicks.php:202
-#: public_html/lists/admin/uclicks.php:122
+#: public_html/lists/admin/uclicks.php:131
 msgid "latestclick"
 msgstr "последний"
 
-#: public_html/lists/admin/userclicks.php:207
+#: public_html/lists/admin/userclicks.php:251
 msgid "HTML"
 msgstr "HTML"
 
@@ -6515,7 +6525,7 @@ msgid "Unique subscribers who clicked"
 msgstr "Уникальные подписчики, совершившие переход"
 
 #: public_html/lists/admin/mclicks.php:142
-#: public_html/lists/admin/uclicks.php:84
+#: public_html/lists/admin/uclicks.php:93
 msgid "View subscribers"
 msgstr "Просмотр подписчиков"
 
@@ -7119,70 +7129,70 @@ msgstr "Нажмите, чтобы удалить подписчика из сп
 msgid "Sorry, only super users can delete users"
 msgstr "Извините, только администраторы могут удалять подписчиков"
 
-#: public_html/lists/admin/users.php:260
+#: public_html/lists/admin/users.php:265
 #, php-format
 msgid "%s subscribers in total"
 msgstr "Подписчиков всего — %s"
 
-#: public_html/lists/admin/users.php:261
+#: public_html/lists/admin/users.php:266
 msgid ""
 "Subscribers with a red icon are either unconfirmed or blacklisted or both"
 msgstr ""
 "Подписчики с красной иконкой не подтвердили подписку и/или в чёрном списке"
 
-#: public_html/lists/admin/users.php:289
+#: public_html/lists/admin/users.php:294
 msgid "Show only unconfirmed users"
 msgstr "Только неподтвержденные"
 
-#: public_html/lists/admin/users.php:291
+#: public_html/lists/admin/users.php:296
 msgid "Show only blacklisted users"
 msgstr "Только из чёрного списка"
 
-#: public_html/lists/admin/users.php:317
+#: public_html/lists/admin/users.php:322
 msgid "asc"
 msgstr "по возрастанию"
 
-#: public_html/lists/admin/users.php:336 public_html/lists/admin/users.php:340
+#: public_html/lists/admin/users.php:342 public_html/lists/admin/users.php:346
 #: public_html/lists/admin/mviews.php:160
 #: public_html/lists/admin/mviews.php:163
 #, php-format
 msgid "Listing user %d to %d"
 msgstr "Список подписчиков от %d до %d"
 
-#: public_html/lists/admin/users.php:363
+#: public_html/lists/admin/users.php:369
 msgid "Find a user"
 msgstr "Найти подписчика"
 
-#: public_html/lists/admin/users.php:378 public_html/databasestructure.php:19
+#: public_html/lists/admin/users.php:384 public_html/databasestructure.php:19
 msgid "Unique ID"
 msgstr "Уникальный идентификатор"
 
-#: public_html/lists/admin/users.php:386
+#: public_html/lists/admin/users.php:392
 msgid "reset"
 msgstr "Сбросить"
 
-#: public_html/lists/admin/users.php:393
+#: public_html/lists/admin/users.php:399
 msgid "Find subscribers"
 msgstr "Найти подписчиков"
 
-#: public_html/lists/admin/users.php:398
+#: public_html/lists/admin/users.php:404
 msgid "Download all users as CSV file"
 msgstr "Скачать список подписчиков (.CSV)"
 
-#: public_html/lists/admin/users.php:400
+#: public_html/lists/admin/users.php:406
 msgid "Add a User"
 msgstr "Добавить подписчика"
 
-#: public_html/lists/admin/users.php:451
-#: public_html/lists/admin/uclicks.php:56
+#: public_html/lists/admin/users.php:457
+#: public_html/lists/admin/uclicks.php:65
 msgid "msgs"
 msgstr "Писем получено"
 
-#: public_html/lists/admin/users.php:472
+#: public_html/lists/admin/users.php:478
 msgid "no results"
 msgstr "Ничего не найдено"
 
-#: public_html/lists/admin/users.php:472
+#: public_html/lists/admin/users.php:478
 msgid "No users apply"
 msgstr "Нет пользователей для выполнения"
 
@@ -7448,8 +7458,8 @@ msgstr "Просмотреть"
 
 #: public_html/lists/admin/index.php:471
 #, php-format
-msgid "You have %s message(s) waiting to be sent"
-msgstr "Кампаний в очереди на отправку - %s"
+msgid "You have %s campaign(s) in the queue, ready for processing"
+msgstr ""
 
 #: public_html/lists/admin/index.php:576
 msgid "Hide forever"
@@ -8055,21 +8065,21 @@ msgstr "Кампания"
 msgid "Invalid email"
 msgstr "Неверный_адрес"
 
-#: public_html/lists/admin/inc/userlib.php:436
+#: public_html/lists/admin/inc/userlib.php:468
 #, php-format
 #, php-format, php-format
 msgid "Removed from blacklist by %s"
 msgstr "Удален из чёрного списка  %s"
 
-#: public_html/lists/admin/inc/userlib.php:438
+#: public_html/lists/admin/inc/userlib.php:470
 msgid "Removed from blacklist"
 msgstr "Удален из чёрного списка"
 
-#: public_html/lists/admin/inc/userlib.php:481
+#: public_html/lists/admin/inc/userlib.php:513
 msgid "Added to blacklist"
 msgstr "Добавлен в чёрный список"
 
-#: public_html/lists/admin/inc/userlib.php:481
+#: public_html/lists/admin/inc/userlib.php:513
 #, php-format
 msgid "Added to blacklist for reason %s"
 msgstr "Добавлено в чёрный список по причине %s"
@@ -8123,6 +8133,10 @@ msgid "mails in mailbox"
 msgstr "сообщений во Входящих"
 
 #: public_html/lists/admin/readtestmail.php:242
+msgid "Processing first"
+msgstr "Обработка в первую очередь"
+
+#: public_html/lists/admin/readtestmail.php:242
 msgid "tests"
 msgstr "проверки"
 
@@ -8168,36 +8182,36 @@ msgstr ""
 msgid "Generate Bounce Rules"
 msgstr "Создать новые правила"
 
-#: public_html/lists/admin/uclicks.php:47
+#: public_html/lists/admin/uclicks.php:56
 msgid "Available URLs"
 msgstr "Доступные URL"
 
-#: public_html/lists/admin/uclicks.php:57
+#: public_html/lists/admin/uclicks.php:66
 msgid "last clicked"
 msgstr "последний переход"
 
-#: public_html/lists/admin/uclicks.php:65
+#: public_html/lists/admin/uclicks.php:74
 msgid "Select URL to view"
 msgstr "Выберите URL-адрес для просмотра"
 
-#: public_html/lists/admin/uclicks.php:70
+#: public_html/lists/admin/uclicks.php:79
 msgid "There are currently no statistics available"
 msgstr "На данный момент не имеется данных по статистике"
 
-#: public_html/lists/admin/uclicks.php:79
+#: public_html/lists/admin/uclicks.php:88
 msgid "URL Click Statistics"
 msgstr "Статистика переходов по ссылкам"
 
-#: public_html/lists/admin/uclicks.php:83
+#: public_html/lists/admin/uclicks.php:92
 msgid "Click details for a URL"
 msgstr "Подробнее о переходах по ссылкам"
 
-#: public_html/lists/admin/uclicks.php:131
+#: public_html/lists/admin/uclicks.php:140
 msgid "view subscribers who clicked"
 msgstr "подписчики, совершившие переходы"
 
-#: public_html/lists/admin/uclicks.php:133
-#: public_html/lists/admin/uclicks.php:146
+#: public_html/lists/admin/uclicks.php:142
+#: public_html/lists/admin/uclicks.php:155
 msgid "click rate"
 msgstr "Доля переходов (click rate), %"
 
@@ -9611,6 +9625,26 @@ msgstr "Список подавления"
 #: public_html/databasestructure.php:353
 msgid "pagetitlehover:suppressionlist"
 msgstr "Управление неподтверждёнными адресами"
+
+#~ msgid "bounces to fetch from the mailbox"
+#~ msgstr "Загрузить возвращённые письма из почтового ящика"
+
+#~ msgid "bounces to process"
+#~ msgstr "Возвращённые письма для обработки"
+
+#~ msgid "processing first"
+#~ msgstr "Обработка в первую очередь"
+
+#~ msgid ""
+#~ "Below are users who have been marked unconfirmed. The in () is the number of "
+#~ "consecutive bounces."
+#~ msgstr ""
+#~ "Ниже приведены подписчики, которые были помечены как неподтвержденные. В "
+#~ "скобках число последовательных возвращённых писем в серии."
+
+#, php-format
+#~ msgid "You have %s message(s) waiting to be sent"
+#~ msgstr "Кампаний в очереди на отправку - %s"
 
 #~ msgid "Admin Authentication initialisation failure"
 #~ msgstr "Ошибка при проверке аутентификации администратора"

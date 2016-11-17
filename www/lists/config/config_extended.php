@@ -29,6 +29,12 @@ $database_user = 'phplist';
 # and what password do we use
 $database_password = 'phplist';
 
+# the mysql server port number if not the default
+$database_port = null;
+
+# the socket to be used
+$database_socket = null;
+
 # enable database connection compression
 $database_connection_compression = false;
 
@@ -460,7 +466,7 @@ define('EMPTY_VALUE_PREFIX', '--');
 # if this is enabled phplist will initialise the From in new messages to be the
 # details of the logged in administrator who is sending the message
 # otherwise it will default to the values set in the configure page that identify
-# the From for system messages
+# the "Default for 'From:' in a campaign"
 define('USE_ADMIN_DETAILS_FOR_MESSAGES', 1);
 
 # attribute value reorder limit
@@ -569,7 +575,7 @@ define('PHPMAILERHOST', '');
 # define('PHPMAILERBLASTPORT',25);
 
 # to use SSL/TLS when sending set this value
-# it can either be "ssl" or "tls", nothing else
+# it can either be "ssl" or "tls" or false to not use SSL/TLS at all
 # define("PHPMAILER_SECURE",'ssl');
 
 ## SMTP debugging

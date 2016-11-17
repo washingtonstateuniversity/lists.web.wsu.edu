@@ -422,11 +422,7 @@ function constructSystemMail($message, $subject = '')
         #  $htmlmessage = str_replace("\n\n","\n",$htmlmessage);
         $htmlmessage = nl2br($htmlmessage);
         ## make links clickable:
-        preg_match_all('~https?://[^\s<]+~i', $htmlmessage, $matches);
-        for ($i = 0; $i < count($matches[0]); ++$i) {
-            $match = $matches[0][$i];
-            $htmlmessage = str_replace($match, '<a href="' . $match . '">' . $match . '</a>', $htmlmessage);
-        }
+        $htmlmessage = preg_replace('~https?://[^\s<]+~i', '<a href="$0">$0</a>', $htmlmessage);
     }
     ## add li-s around the lists
     if (preg_match('/<ul>\s+(\*.*)<\/ul>/imsxU', $htmlmessage, $listsmatch)) {
@@ -878,8 +874,9 @@ function getPageLock($force = 0)
             Sql_query("update {$tables['sendprocess']} set alive = 0 where id = " . $running_res['id']);
         } elseif ((int)$count >= (int)$max) {
             #   cl_output (sprintf($GLOBALS['I18N']->get('A process for this page is already running and it was still alive %s seconds ago'),$running_res['age']));
-            output(s('A process for this page is already running and it was still alive %d seconds ago',
-                $running_res['age']), 0);
+            if (function_exists('output')) {
+                output(s('A process for this page is already running and it was still alive %d seconds ago', $running_res['age']), 0);
+            }
             sleep(1); # to log the messages in the correct order
             if ($GLOBALS['commandline']) {
                 cl_output(s('A process for this page is already running and it was still alive %d seconds ago',

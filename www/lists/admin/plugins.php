@@ -34,16 +34,16 @@ if (!empty($_POST['pluginurl']) && class_exists('ZipArchive')) {
 
     ## verify the url against known locations, and require it to be "zip".
     ## let's hope Github keeps this structure for a while
-    if (!preg_match('~^https?://github\.com/([\w-_]+)/([\w-_]+)/archive/([\w]+)\.zip$~i', $packageurl, $regs)) {
+    if (!preg_match('~^https?://github\.com/([\w-_]+)/([\w-_]+)/archive/(.+)\.zip$~i', $packageurl, $regs)) {
         print Error(s('Invalid download URL, please reload the page and try again'));
 
         return;
-    } else {
-        $developer = $regs[1];
-        $project_name = $regs[2];
-        $branch = $regs[3];
     }
-    print '<h3>' . s('Fetching plugin') . '</h3>';
+    $developer = $regs[1];
+    $project_name = $regs[2];
+    $branch = $regs[3];
+
+    print '<h3>'.s('Fetching plugin').'</h3>';
 
     print '<h2>' . s('Developer') . ' ' . $developer . '</h2>';
     print '<h2>' . s('Project') . ' ' . $project_name . '</h2>';
@@ -77,7 +77,7 @@ if (!empty($_POST['pluginurl']) && class_exists('ZipArchive')) {
         $dir_prefix = '';
         for ($i = 0; $i < $zip->numFiles; ++$i) {
             #      echo "index: $i<br/>\n";
-            #    var_dump($zip->statIndex($i));
+  #    var_dump($zip->statIndex($i));
             $zipItem = $zip->statIndex($i);
             if (preg_match('~^([^/]+)/plugins/~', $zipItem['name'], $regs)) {
                 array_push($extractList, $zipItem['name']);
@@ -230,6 +230,15 @@ foreach ($GLOBALS['allplugins'] as $pluginname => $plugin) {
         $details .= '<div class="detail"><span class="label">' . s('More information') . '</span>';
         $details .= '<span class="value"><a href="' . $plugin->documentationUrl . '" target="moreinfoplugin">' . s('Documentation Page') . '</a></span></div>';
     }
+
+    if ($plugin->enabled && !empty($plugin->settings)) {
+        $firstSetting = reset($plugin->settings);
+        $category = $firstSetting['category'];
+        $settingsUrl = PageURL2('configure')  . '#' . strtolower($category);
+        $details .= '<div class="detail"><span class="label">' . s('Configure') . '</span>';
+        $details .= '<span class="value"><a href="' . $settingsUrl . '">' . s($category) . ' ' . s('settings'). '</a></span></div>';
+    }
+
     if (pluginCanEnable($pluginname)) {
         $ls->addColumn($pluginname, s('enabled'), $plugin->enabled ? $GLOBALS['img_tick'] : $GLOBALS['img_cross']);
         $ls->addColumn($pluginname, s('action'), $plugin->enabled ?

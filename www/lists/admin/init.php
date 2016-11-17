@@ -8,7 +8,7 @@
 define('PHPLISTINIT', true);
 error_reporting(0);
 
-define("VERSION", "3.2.5");
+define("VERSION", "3.2.6");
 if (!defined('DEVVERSION')) {
     define('DEVVERSION', false);
 }
@@ -114,6 +114,12 @@ if (empty($GLOBALS['language_module'])) {
 }
 if (empty($GLOBALS['database_module']) || !is_file(dirname(__FILE__) . '/' . $GLOBALS['database_module'])) {
     $GLOBALS['database_module'] = 'mysqli.inc';
+}
+if (!isset($database_port)) {
+    $database_port = null;
+}
+if (!isset($database_socket)) {
+    $database_socket = null;
 }
 if (!isset($database_connection_compression)) {
     $database_connection_compression = false;
@@ -438,6 +444,10 @@ if (!defined('EMAIL_ADDRESS_VALIDATION_LEVEL')) {
 if (!defined('BLACKLIST_EMAIL_ON_BOUNCE')) {
     define('BLACKLIST_EMAIL_ON_BOUNCE', 5);
 }
+if ($bounce_unsubscribe_threshold < BLACKLIST_EMAIL_ON_BOUNCE) {
+    $bounce_unsubscribe_threshold = BLACKLIST_EMAIL_ON_BOUNCE;
+}
+
 if (!defined('UNBLACKLIST_IN_PROFILE')) {
     define('UNBLACKLIST_IN_PROFILE', false);
 }
@@ -528,7 +538,7 @@ if (!defined('PHPMAILERTESTHOST') && defined('PHPMAILERHOST')) {
     define('PHPMAILERTESTHOST', PHPMAILERHOST);
 }
 if (!defined('PHPMAILER_SECURE')) {
-    define('PHPMAILER_SECURE', false);
+    define('PHPMAILER_SECURE', 'auto');
 }
 if (!defined('PHPMAILER_SMTP_DEBUG')) {
     define('PHPMAILER_SMTP_DEBUG', 0);
@@ -587,7 +597,8 @@ if (!defined('RFC_DIRECT_DELIVERY')) {
 if (0 && class_exists('HTTP_Request2')) {
     $GLOBALS['has_pear_http_request'] = 2;
 } else {
-    @include_once 'HTTP/Request.php';
+    ## this seems to crash in PHP7. Let's just use curl instead
+    # @include_once 'HTTP/Request.php';
     $GLOBALS['has_pear_http_request'] = class_exists('HTTP_Request');
 }
 $GLOBALS['has_curl'] = function_exists('curl_init');
